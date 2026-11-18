@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OVA de Teoría General de Sistemas sobre el caos determinista y el mapa logístico.">
+<title>Simulador · Laboratorio del Caos</title>
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<script defer src="../js/main.js"></script>
+<script defer src="../js/simulador.js"></script>
+</head>
+<body id="arriba">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <div class="identity">
+      <img class="header-logo" src="../assets/imagenes/logo-unisimon.png" alt="Universidad Simón Bolívar" width="62" height="40">
+      <a class="brand" href="index.html">Laboratorio<span> del Caos</span></a>
+    </div>
+    <button type="button" id="menu" class="menu" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav id="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="teoria.html">Teoría</a><a href="simulador.html" aria-current="page">Simulador</a><a href="juegos.html">Juegos</a><a href="quiz.html">Evaluación</a><a href="creditos.html">Créditos</a></nav>
+  </div>
+</header>
+<main id="contenido">
+  <section id="simulador" class="section tinted page-section">
+    <div class="shell">
+      <p class="label">Práctica</p>
+      <h1>Dos trayectorias, una regla</h1>
+      <p>Cambia r y los estados iniciales. El eje horizontal muestra el paso n y el vertical, el estado x.</p>
+      <div class="sim-layout">
+        <form id="sim-form" class="controls">
+          <div class="presets" aria-label="Ejemplos de parámetros">
+            <button type="button" data-r="2.8">Estable</button>
+            <button type="button" data-r="3.2">Periódico</button>
+            <button type="button" data-r="3.9">Caótico</button>
+          </div>
+          <label>Parámetro r <input name="rate" type="number" inputmode="decimal" min="0" max="4" step="any" value="3.9" required></label>
+          <label>Estado inicial A <input name="startA" type="number" inputmode="decimal" min="0" max="1" step="any" value="0.25" required></label>
+          <label>Estado inicial B <input name="startB" type="number" inputmode="decimal" min="0" max="1" step="any" value="0.2501" required></label>
+          <label>Iteraciones <input name="steps" type="number" min="10" max="160" value="45" required></label>
+          <button class="primary" type="submit">Simular</button>
+        </form>
+        <figure class="chart-box">
+          <canvas id="sim-chart" role="img" aria-label="Gráfica de dos trayectorias del mapa logístico" aria-describedby="sim-summary"></canvas>
+          <figcaption><span class="legend a">A · línea continua</span><span class="legend b">B · línea discontinua</span></figcaption>
+          <p id="sim-summary" class="feedback" role="status"></p>
+          <details><summary>Ver valores de ambas trayectorias</summary>
+            <div class="table-wrap"><table><thead><tr><th scope="col">Paso</th><th scope="col">A</th><th scope="col">B</th></tr></thead><tbody id="sim-data"></tbody></table></div>
+          </details>
+        </figure>
+      </div>
+      <div class="exercise">
+        <h3>Comprueba tu predicción</h3>
+        <p>Con el ejemplo «Caótico», ¿cuál de estas observaciones es esperable después de varias iteraciones?</p>
+        <div class="choices">
+          <button type="button" data-exercise="yes">Las trayectorias pueden separarse.</button>
+          <button type="button" data-exercise="no">La separación inicial se mantiene fija.</button>
+        </div>
+        <p id="exercise-feedback" class="feedback answer-feedback" role="status"></p>
+      </div>
+      <div class="exercise">
+        <h3>Calcula una iteración</h3>
+        <p>Si r = 3 y el estado actual es x₀ = 0,2, calcula x₁ con la fórmula del mapa logístico.</p>
+        <form id="calc-form" class="calc-exercise">
+          <label>Resultado x₁ <input name="answer" type="text" inputmode="decimal" required placeholder="0,00"></label>
+          <button type="submit">Comprobar cálculo</button>
+        </form>
+        <p id="calc-feedback" class="feedback answer-feedback" role="status"></p>
+      </div>
+    </div>
+  </section>
+<div class="shell next-page"><a class="button" href="juegos.html">Continuar a Juegos <span aria-hidden="true">→</span></a></div>
+</main>
+<footer class="shell footer"><a href="creditos.html">Créditos del OVA</a><a href="#arriba">Volver arriba ↑</a></footer>
+<noscript>Activa JavaScript para usar las actividades interactivas.</noscript>
+</body>
+</html>

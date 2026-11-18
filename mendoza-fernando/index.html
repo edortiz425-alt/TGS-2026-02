@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Objeto Virtual de Aprendizaje sobre la teoría de comportamientos.">
+<title>OVA | Teoría de comportamientos</title>
+<style>
+:root{
+  --navy:#172554;--blue:#2563eb;--cyan:#0ea5a4;--gold:#f59e0b;
+  --ink:#172033;--muted:#64748b;--paper:#f5f8fc;--white:#fff;
+  --line:#dbe4ef;--good:#15803d;--bad:#b91c1c;--soft:#eaf2ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background-image:url("bg.png");
+  background-size:120%;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  color:var(--ink);
+  font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+header{background:linear-gradient(125deg,#0E0730,#271A66 65%,#0B1D54);color:white;padding:54px 20px 48px}
+.hero{max-width:1050px;margin:auto;position:relative;}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;font-weight:800;color:#bae6fd}
+h1{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.08;margin:.5rem 0 1rem}
+header p{max-width:720px;color:#e0f2fe;font-size:1.12rem;margin:0}
+.hero-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.tag{border:1px solid #ffffff66;background:#ffffff18;border-radius:99px;padding:6px 12px;font-size:.86rem}
+nav{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 14px #1725540c}
+.navinner{max-width:1050px;margin:auto;display:flex;gap:7px;overflow:auto;padding:10px 16px}
+nav a{white-space:nowrap;text-decoration:none;color:#334155;font-size:.9rem;font-weight:650;padding:7px 11px;border-radius:8px}
+nav a:hover{background:var(--soft);color:var(--blue)}
+main{max-width:1050px;margin:30px auto;padding:0 18px 60px}
+section{
+  scroll-margin-top:80px;
+  margin:25px 0;
+  background:rgba(255,255,255,0.93);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:clamp(20px,4vw,34px);
+  box-shadow:0 8px 28px #17255408;
+}
+h2{font-size:1.65rem;line-height:1.2;color:var(--navy);margin:0 0 15px}
+h3{color:#1e3a8a;margin:0 0 8px}
+.lead{font-size:1.08rem;color:#334155}
+.kicker{font-size:.78rem;font-weight:800;letter-spacing:.12em;color:var(--cyan);text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+.card{padding:18px;border:1px solid var(--line);border-radius:14px;background:#fbfdff}
+.card p{margin:7px 0 0;color:#475569}
+.callout{border-left:4px solid var(--cyan);background:#ecfeff;padding:14px 17px;border-radius:0 10px 10px 0;margin:16px 0}
+.author{border-top:3px solid var(--gold)}
+.step{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--blue);font-weight:800;margin-right:7px}
+label{display:block;font-weight:650;margin:13px 0 6px}
+select,input[type=text]{width:100%;max-width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;background:white;color:var(--ink);font:inherit}
+button{border:0;border-radius:10px;background:var(--blue);color:white;font:inherit;font-weight:750;padding:11px 17px;cursor:pointer;margin-top:14px}
+button:hover{filter:brightness(.92)}
+button.secondary{background:#e2e8f0;color:#1e293b}
+.feedback{display:none;margin-top:13px;padding:13px 15px;border-radius:10px;background:#f1f5f9}
+.feedback.show{display:block}
+.feedback.good{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.feedback.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.question{padding:18px 0;border-bottom:1px solid var(--line)}
+.question:last-child{border:0}
+.question p{font-weight:750;margin:0 0 9px}
+.option{display:flex;gap:9px;align-items:flex-start;padding:7px 9px;border-radius:8px;font-weight:450;cursor:pointer}
+.option:hover{background:#f1f5f9}
+.option input{margin-top:5px;accent-color:var(--blue)}
+.result{display:none;margin-top:20px;padding:20px;border-radius:14px;background:#eff6ff;border:1px solid #bfdbfe}
+.result.show{display:block}
+.score{font-size:2.3rem;font-weight:850;color:var(--navy)}
+.progress{height:9px;background:#dbeafe;border-radius:99px;overflow:hidden;margin:10px 0}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:width .3s}
+small,.muted{color:var(--muted)}
+footer{text-align:center;color:#64748b;padding:20px;font-size:.9rem}
+@media(max-width:600px){header{padding-top:38px}nav a{font-size:.82rem}section{padding:19px}}
+.logo-uni{
+  position:absolute;
+  width:200px;
+  height:auto;
+  top:30px;
+  left:760px;
+  object-fit:contain;}
+</style>
+</head>
+<body>
+<header>
+ <div class="hero">
+ 
+  <img src="unismlogo.png" alt="Logo uni" class="logo-uni">
+  <div class="eyebrow">Objeto Virtual de Aprendizaje · Teoría de Sistemas </div>
+  <h1>Teoría de comportamientos</h1>
+  <p>Comprender cómo las personas razonan, toman decisiones y responden a los espacios que las rodean.</p>
+ 
+ </div>
+</header>
+<nav><div class="navinner">
+ <a href="#inicio">Inicio</a><a href="#fundamentos">Fundamentos</a><a href="#autores">Autores</a><a href="#aplicaciones">Aplicaciones</a><a href="#actividad1">Actividad 1</a><a href="#actividad2">Actividad 2</a><a href="#evaluacion">Quiz final</a>
+</div></nav>
+<main>
+<section id="inicio">
+ <div class="kicker">Bienvenida/o</div><h2>¿Qué aprenderás?</h2>
+ <p class="lead">En este OVA estudiarás la teoría de comportamientos como una forma de analizar a las personas y sus procesos, entendiendo al ser humano como un sistema que interactúa con su entorno.</p>
+ <div class="grid">
+  <div class="card"><h3>Objetivo general</h3><p>Reconocer los fundamentos de la teoría de comportamientos y aplicar sus ideas al análisis de situaciones laborales y de consumo.</p></div>
+  <div class="card"><h3>Al finalizar podrás</h3><p>Explicar la relación con la TGS, identificar aportes de Simon y Maslow y proponer mejoras a partir de las respuestas de las personas.</p></div>
+  <div class="card"><h3>Ruta de aprendizaje</h3><p>Lee los contenidos, desarrolla las dos actividades y comprueba lo aprendido con el cuestionario de siete preguntas.</p></div>
+ </div>
+</section>
+<section id="fundamentos">
+ <div class="kicker">|Parte 1</div><h2>Fundamentos de la teoría de comportamientos</h2>
+ <p>Según el documento base, la teoría de comportamientos es una teoría de la psicología humana que plantea que los seres humanos y sus procesos pueden entenderse como un sistema y analizarse mediante la <strong>Teoría General de Sistemas (TGS)</strong>.</p>
+ <div class="callout"><strong>Idea clave:</strong> para comprender una acción no basta con observarla de manera aislada; es importante considerar cómo razona la persona y el contexto en el que se encuentra: así como se hace en la Teoria General de Sistemas</div>
+ <h3>El ser humano como sistema</h3>
+ <p>El ser humano puede concebirse como un sistema compuesto por diferentes subsistemas. En el contexto empresarial descrito en el documento, se destaca el subsistema del cerebro humano y sus conexiones, porque su análisis permite obtener información sobre la manera en que una persona razona y actúa según el contexto.</p>
+ <div class="grid">
+  <div class="card"><h3>Persona</h3><p>Un sistema con procesos y subsistemas que se relacionan entre sí.</p></div>
+  <div class="card"><h3>Contexto</h3><p>Las condiciones del entorno influyen en la experiencia y en las respuestas de cada individuo.</p></div>
+  <div class="card"><h3>Comportamiento</h3><p>Las acciones pueden analizarse para comprender cómo la persona interpreta una situación.</p></div>
+ </div>
+</section>
+<section id="autores">
+ <div class="kicker">|Parte 2</div><h2>Autores y aportes principales</h2>
+ <div class="grid">
+  <div class="card author"><h3>Herbert Simon</h3><p><strong>Racionalidad limitada.</strong> En la toma de decisiones, las personas se basan en lo que conocen y pueden observar. Por ello, su decisión no necesariamente será la más eficiente.</p></div>
+  <div class="card author"><h3>Abraham Maslow</h3><p><strong>Jerarquía de necesidades.</strong> Su propuesta permite comprender necesidades esenciales que orientan lo que las personas buscan y, por tanto, ayuda a interpretar su actuar y razonar.</p></div>
+ </div>
+ <div class="callout">Al analizar una decisión, considera tanto la información disponible para la persona como las necesidades que pueden orientar su conducta.</div>
+</section>
+<section id="aplicaciones">
+ <div class="kicker">|Parte 3</div><h2>Aplicaciones de la teoría de comportamientos</h2>
+ <div class="grid">
+  <div class="card"><h3>Entorno laboral</h3><p>Se pueden estudiar la comodidad, frustración y concentración de las personas en su espacio de trabajo. Esto incluye revisar la ubicación de baños, zonas de descanso, puestos de trabajo y salidas.</p><p>También se pueden identificar molestias relacionadas con la temperatura o los materiales de los elementos utilizados. Corregir inconveniencias puede contribuir a mejorar la eficiencia.</p></div>
+  <div class="card"><h3>Consumidores y espacios</h3><p>Analizar la psicología y las respuestas sensoriales ayuda a diseñar experiencias cómodas en centros comerciales, plazas, residencias y otros lugares concurridos.</p><p>La ubicación de los elementos importa: por ejemplo, observar cuánto camina una persona antes de considerar tirar su basura puede orientar dónde ubicar los recipientes.</p></div>
+ </div>
+ <h3>Ejemplo aplicado</h3>
+ <p>Si en un parque las personas suelen soltar su basura de inmediato, sin buscar un bote de basura, observar ese comportamiento puede ayudar a decidir una ubicación más conveniente. La propuesta parte de estudiar la interacción entre las personas y su entorno para anticipar las acciones de las personas: evitando desde un inicio la situacion.</p>
+</section>
+<section id="actividad1">
+ <div class="kicker">Actividad interactiva 1</div><h2>Gestor del entorno</h2>
+ <p>Lee cada situación y selecciona la dimensión que conviene analizar primero.</p>
+ <div class="question"><p><span class="step">1</span>Varios trabajadores manifiestan frustración porque deben recorrer espacios angostos entre cubiculos para llegar a la zona de impresiones.</p>
+  <label for="a1q1">¿Qué aspecto se debe revisar?</label><select id="a1q1"><option value="">Selecciona una opción</option><option value="a">La disposicion de los cubiculos en las oficinas</option><option value="b">La ubicacion de las impresoras</option><option value="c">El orden de los trabajadores cercanos a las impresoras</option></select>
+ </div>
+ <div class="question"><p><span class="step">2</span>Los trabajadores pierden concentración porque el espacio mantiene la temperatura ambiente en una ciudad calurosa.</p>
+  <label for="a1q2">¿Qué elemento del entorno conviene evaluar?</label><select id="a1q2"><option value="">Selecciona una opción</option><option value="a">La calidad de la ventilacion de los equipos eletronicos<option><option value="b">El acondicionamiento ambiental del espacio</option><option value="c">La ubicacion de las oficinas</option></select>
+ </div>
+ <div class="question"><p><span class="step">3</span>La organización empresarial quiere comprender por qué las personas reaccionan de manera diferente ante el cambio de directiva.</p>
+  <label for="a1q3">¿Qué enfoque es coherente con el documento?</label><select id="a1q3"><option value="">Selecciona una opción</option><option value="a">Analizar las opiniones de los empleados</option><option value="b">Leer las discusiones en el internet</option><option value="c">Estudiar las implicaciones y consecuencias de tener un nuevo director</option></select>
+ </div>
+ <button onclick="checkActivity1()">Comprobar medidas</button>
+ <div id="activity1Feedback" class="feedback" aria-live="polite"></div>
+</section>
+<section id="actividad2">
+ <div class="kicker">Actividad interactiva 2</div><h2>Diseña una experiencia para el consumidor</h2>
+ <p>Imagina que estás ayudando a mejorar un centro comercial. Analiza el comportamiento observado y selecciona la intervención más coherente con la teoría.</p>
+ <div class="card">
+  <h3>Situación</h3>
+  <p>A lo largo del parque tematico se encuentra basura en todos lados aunque haya botes de bsura.</p>
+  <label for="a2q1">1. ¿Qué información sería útil observar?</label>
+  <select id="a2q1"><option value="">Selecciona una opción</option><option value="a">Los residuos y los puntos donde hay basura</option><option value="b">La distancia de los residuos al puesto de comida mas cercano</option><option value="c">El nivel de educacion medio de los visitantes</option></select>
+  <label for="a2q2">2. ¿Qué decisión de diseño se apoya en esa observación?</label>
+  <select id="a2q2"><option value="">Selecciona una opción</option><option value="a">Cerrar los puestos de comida que más generan residuos</option><option value="b">Ubicar recipientes en lugares convenientes según los puntos observados</option><option value="c">Aumentar el sueldo de los limpiadores</option></select>
+  <label for="a2q3">3. ¿Qué principio se aplica?</label>
+  <select id="a2q3"><option value="">Selecciona una opción</option><option value="a">Diseñar buscando el maximo beneficio monetario</option><option value="b">Diseñar pensando en el medio ambiente</option><option value="c">Diseñar en consecuencia a los habitos de las personas</option></select>
+ </div>
+ <button onclick="checkActivity2()">Comprobar medidas</button>
+ <div id="activity2Feedback" class="feedback" aria-live="polite"></div>
+</section>
+<section id="evaluacion">
+ <div class="kicker">Evaluación de aprendizaje</div><h2>Quiz final: teoría de comportamientos</h2>
+ <p>Responde las siete preguntas. Selecciona una sola respuesta por pregunta y pulsa «Calificar evaluación». Cada pregunta vale lo mismo: la nota se calcula automáticamente sobre 5,0.</p>
+ <form id="quizForm">
+  <div class="question"><p>1. Según el documento, ¿cómo concibe la teoría de comportamientos al ser humano?</p>
+   <label class="option"><input type="radio" name="q1" value="a"> Como un sistema que puede analizarse mediante la TGS.</label>
+   <label class="option"><input type="radio" name="q1" value="b"> Como un engranaje en otros sistemas.</label>
+   <label class="option"><input type="radio" name="q1" value="c"> Como una organización sin subsistemas.</label>
+   <label class="option"><input type="radio" name="q1" value="d"> Como un elemento dentro del sitema que es la sociedad.</label>
+  </div>
+  <div class="question"><p>2. ¿Qué aspecto destaca el documento al aplicar la teoría en una empresa?</p>
+   <label class="option"><input type="radio" name="q2" value="a"> Como se relaciona la persona con su entorno.</label>
+   <label class="option"><input type="radio" name="q2" value="b"> Exclusivamente la estructura física del edificio.</label>
+   <label class="option"><input type="radio" name="q2" value="c"> Solamente los resultados financieros.</label>
+   <label class="option"><input type="radio" name="q2" value="d"> La cantidad de productos fabricados.</label>
+  </div>
+  <div class="question"><p>3. ¿Qué plantea la racionalidad limitada de Herbert Simon?</p>
+   <label class="option"><input type="radio" name="q3" value="a"> Las personas siempre conocen todas las alternativas.</label>
+   <label class="option"><input type="radio" name="q3" value="b"> Las decisiones se basan en lo que la persona conoce y ve.</label>
+   <label class="option"><input type="radio" name="q3" value="c"> Las decisiones nunca dependen del contexto.</label>
+   <label class="option"><input type="radio" name="q3" value="d"> Toda decisión es necesariamente la más eficiente.</label>
+  </div>
+  <div class="question"><p>4. ¿Cuál es el aporte asociado a Abraham Maslow en el documento?</p>
+   <label class="option"><input type="radio" name="q4" value="a"> La teoría de sistemas abiertos.</label>
+   <label class="option"><input type="radio" name="q4" value="b"> El análisis de recorridos en parques.</label>
+   <label class="option"><input type="radio" name="q4" value="c"> La jerarquía de necesidades.</label>
+   <label class="option"><input type="radio" name="q4" value="d"> La racionalidad limitada.</label>
+  </div>
+  <div class="question"><p>5. En el entorno laboral, ¿qué conjunto de factores propone examinar el documento?</p>
+   <label class="option"><input type="radio" name="q5" value="a"> Comodidad, frustración, concentración y condiciones del espacio.</label>
+   <label class="option"><input type="radio" name="q5" value="b"> Únicamente salarios y ventas.</label>
+   <label class="option"><input type="radio" name="q5" value="c"> Solo la imagen publicitaria de la empresa.</label>
+   <label class="option"><input type="radio" name="q5" value="d"> Exclusivamente la cantidad de empleados.</label>
+  </div>
+  <div class="question"><p>6. ¿Por qué es importante estudiar el comportamiento de los consumidores al diseñar espacios?</p>
+   <label class="option"><input type="radio" name="q6" value="a"> Para evitar cualquier cambio en la distribución.</label>
+   <label class="option"><input type="radio" name="q6" value="b"> Para crear experiencias cómodas y optimizar la ubicación de elementos.</label>
+   <label class="option"><input type="radio" name="q6" value="c"> Para reemplazar la observación por suposiciones.</label>
+   <label class="option"><input type="radio" name="q6" value="d"> Para hacer que todos los espacios sean idénticos.</label>
+  </div>
+  <div class="question"><p>7. En el ejemplo de los botes de basura en un parque, ¿qué se busca observar?</p>
+   <label class="option"><input type="radio" name="q7" value="a"> El color preferido por los visitantes.</label>
+   <label class="option"><input type="radio" name="q7" value="b"> El número de árboles del parque.</label>
+   <label class="option"><input type="radio" name="q7" value="c"> Cuántos pasos tarda una persona en considerar tirar su basura.</label>
+   <label class="option"><input type="radio" name="q7" value="d"> El horario de apertura de los comercios cercanos.</label>
+  </div>
+  <button type="button" onclick="gradeQuiz()">Calificar evaluación</button>
+  <button type="reset" class="secondary" onclick="resetQuiz()">Volver a intentar</button>
+ </form>
+ <div id="quizResult" class="result" aria-live="polite">
+  <div class="muted">Tu calificación</div><div class="score" id="scoreText">0,0 / 5,0</div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <p id="correctText"></p><p id="messageText"></p>
+  <div id="answerReview"></div>
+ </div>
+</section>
+<section>
+ <div class="kicker">Cierre</div><h2>Reflexiona y aplica</h2>
+ <p>La teoría de comportamientos permite observar a las personas en relación con su contexto. En el trabajo, esto puede orientar mejoras en comodidad y concentración; en los espacios de consumo, puede ayudar a diseñar experiencias más cómodas a partir de la observación de recorridos y respuestas.</p>
+ <p><strong>Pregunta para reflexionar:</strong> ¿De qué formas puedes entender a quienes te rodean teniendo en cuenta los principios de la TGS?</p>
+ <p class="muted"><strong>Fuente de contenido:</strong> Mainen Z.F. 2026. The legible body and the language of cognition. Current Opinion in Neurology. 101-103282 | Aprendizajes previos. </p>
+</section>
+</main>
+<footer>-OVA Teoria de Sistemas · Ingenieria en Sistemas 2° Semestre · Universidad Simon Bolivar 2026-</footer>
+<script>
+function showFeedback(id, text, good){
+ const el=document.getElementById(id);el.textContent=text;el.className='feedback show '+(good?'good':'bad');
+}
+function checkActivity1(){
+ const keys={a1q1:'a',a1q2:'b',a1q3:'c'};
+ const explanations=[
+  'La ubicación de zonas clave, como el área de descanso, forma parte del análisis del espacio laboral.',
+  'La temperatura es una condición del acondicionamiento del entorno que puede afectar la comodidad y concentración.',
+  'El enfoque propuesto consiste en comprender cómo razona la persona y cómo influye el contexto en sus acciones.'
+ ];
+ let score=0,missing=0;Object.keys(keys).forEach((k,i)=>{const v=document.getElementById(k).value;if(!v)missing++;if(v===keys[k])score++;});
+ if(missing){showFeedback('activity1Feedback','Responde las tres situaciones antes de comprobar. Llevas '+score+' de 3 respuestas correctas.',false);return;}
+ showFeedback('activity1Feedback','Resultado: '+score+'/3. '+(score===3?'¡Excelente análisis! ':'Revisa las ideas clave. ')+explanations.join(' '),score===3);
+}
+function checkActivity2(){
+ const keys={a2q1:'a',a2q2:'b',a2q3:'c'};
+ const explanations=[
+  'Observar recorridos y puntos de búsqueda permite comprender cómo interactúan los visitantes con el espacio.',
+  'La ubicación debe responder al comportamiento observado para facilitar el uso de los recipientes.',
+  'La propuesta analiza la relación entre las personas y su entorno.'
+ ];
+ let score=0,missing=0;Object.keys(keys).forEach((k)=>{const v=document.getElementById(k).value;if(!v)missing++;if(v===keys[k])score++;});
+ if(missing){showFeedback('activity2Feedback','Completa las tres preguntas antes de comprobar. Llevas '+score+' de 3 respuestas correctas.',false);return;}
+ showFeedback('activity2Feedback','Resultado: '+score+'/3. '+(score===3?'¡Muy bien! ':'Ten presente la importancia de observar a los usuarios. ')+explanations.join(' '),score===3);
+}
+const answerKey={q1:'a',q2:'a',q3:'b',q4:'c',q5:'a',q6:'b',q7:'c'};
+const answerTexts={
+ q1:'El ser humano se entiende como un sistema analizable mediante la TGS.',
+ q2:'En la aplicación empresarial se destaca el subsistema cerebral y sus conexiones.',
+ q3:'La racionalidad limitada considera la información que la persona conoce y ve.',
+ q4:'Maslow fundamentó la jerarquía de necesidades.',
+ q5:'Se analizan comodidad, frustración, concentración y condiciones del espacio.',
+ q6:'El estudio ayuda a diseñar experiencias cómodas y ubicar adecuadamente los elementos.',
+ q7:'El ejemplo considera los pasos que tarda una persona en decidir tirar la basura.'
+};
+function gradeQuiz(){
+ let correct=0,answered=0;const review=[];
+ for(let i=1;i<=7;i++){
+  const q='q'+i;const chosen=document.querySelector('input[name="'+q+'"]:checked');
+  if(chosen){answered++;if(chosen.value===answerKey[q])correct++;}
+  review.push('<p><strong>Pregunta '+i+':</strong> '+(chosen&&chosen.value===answerKey[q]?'Correcta. ':'Incorrecta o sin responder. ')+answerTexts[q]+'</p>');
+ }
+ if(answered<7){const proceed=confirm('Has respondido '+answered+' de 7 preguntas. ¿Deseas calificar de todas formas? Las preguntas sin responder contarán como incorrectas.');if(!proceed)return;}
+ const grade=(correct/7)*5;
+ const rounded=Math.round(grade*10)/10;
+ document.getElementById('scoreText').textContent=rounded.toFixed(1).replace('.',',')+' / 5,0';
+ document.getElementById('correctText').textContent='Respuestas correctas: '+correct+' de 7. Respuestas contestadas: '+answered+' de 7.';
+ document.getElementById('messageText').textContent=rounded>=4.5?'Desempeño superior: demuestras un dominio destacado de los contenidos.':rounded>=3.5?'Desempeño alto: comprendes la mayoría de los conceptos.':rounded>=3?'Desempeño básico: conviene repasar algunos conceptos.':'Desempeño bajo: revisa el contenido y vuelve a intentarlo.';
+ document.getElementById('progressBar').style.width=(rounded/5*100)+'%';
+ document.getElementById('answerReview').innerHTML='<h3>Retroalimentación</h3>'+review.join('');
+ const result=document.getElementById('quizResult');result.classList.add('show');result.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function resetQuiz(){
+ setTimeout(()=>{document.getElementById('quizResult').classList.remove('show');document.getElementById('progressBar').style.width='0';},0);
+}
+</script>
+</body>
+</html>

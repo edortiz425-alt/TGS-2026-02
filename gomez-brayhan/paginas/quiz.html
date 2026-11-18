@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OVA de Teoría General de Sistemas sobre el caos determinista y el mapa logístico.">
+<title>Evaluación · Laboratorio del Caos</title>
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<script defer src="../js/main.js"></script>
+<script defer src="../js/quiz.js"></script>
+</head>
+<body id="arriba">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <div class="identity">
+      <img class="header-logo" src="../assets/imagenes/logo-unisimon.png" alt="Universidad Simón Bolívar" width="62" height="40">
+      <a class="brand" href="index.html">Laboratorio<span> del Caos</span></a>
+    </div>
+    <button type="button" id="menu" class="menu" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav id="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="teoria.html">Teoría</a><a href="simulador.html">Simulador</a><a href="juegos.html">Juegos</a><a href="quiz.html" aria-current="page">Evaluación</a><a href="creditos.html">Créditos</a></nav>
+  </div>
+</header>
+<main id="contenido">
+  <section id="quiz" class="section tinted page-section">
+    <div class="shell quiz-layout">
+      <header class="quiz-intro">
+        <div>
+          <p class="label">Evaluación</p>
+          <h1>Comprueba lo aprendido</h1>
+          <p>Responde las cinco preguntas. Apruebas con tres aciertos y, al calificar, verás las explicaciones.</p>
+        </div>
+        <div class="quiz-progress">
+          <label for="quiz-progress">Preguntas respondidas</label>
+          <progress id="quiz-progress" value="0" max="5"></progress>
+          <output id="quiz-progress-text">0 de 5</output>
+        </div>
+      </header>
+      <div>
+        <section class="result-panel" id="quiz-result" aria-labelledby="quiz-result-title" hidden>
+          <span class="result-sparks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="result-mark" aria-hidden="true"></span>
+          <h2 id="quiz-result-title" tabindex="-1"></h2>
+          <p class="result-detail"></p>
+          <div class="result-actions">
+            <button class="primary" type="reset" form="quiz-form">Intentar de nuevo</button>
+            <a class="button" href="#quiz-questions">Revisar respuestas</a>
+            <a class="button" href="index.html">Salir de la evaluación</a>
+          </div>
+        </section>
+        <form id="quiz-form">
+          <div id="quiz-questions" tabindex="-1"></div>
+          <div class="choices" id="quiz-controls">
+            <button class="primary" type="submit">Calificar</button>
+            <button type="reset">Reiniciar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+<div class="shell next-page"><a class="button" href="creditos.html">Continuar a Créditos <span aria-hidden="true">→</span></a></div>
+</main>
+<footer class="shell footer"><a href="creditos.html">Créditos del OVA</a><a href="#arriba">Volver arriba ↑</a></footer>
+<noscript>Activa JavaScript para usar las actividades interactivas.</noscript>
+</body>
+</html>

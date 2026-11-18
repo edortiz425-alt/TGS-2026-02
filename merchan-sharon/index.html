@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoría de la Información | Sharon Merchan</title>
+<link rel="stylesheet" href="style.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+ --bg:#090d1b;
+ --panel:#121a30;
+ --panel2:#192440;
+ --purple:#a78bfa;
+ --cyan:#4de5e0;
+ --pink:#ec8aff;
+ --white:#f4f5ff;
+ --muted:#a5b0ce;
+ --border:rgba(255,255,255,.09);
+}
+
+* {
+ box-sizing:border-box;
+ scroll-behavior:smooth;
+}
+
+body {
+ margin:0;
+ font-family:Inter,Arial,sans-serif;
+ background:var(--bg);
+ color:var(--white);
+ line-height:1.7;
+}
+
+body.light {
+ --bg:#eef2fa;
+ --panel:#fff;
+ --panel2:#e5eafa;
+ --white:#202a42;
+ --muted:#65718c;
+ --border:rgba(20,35,70,.12);
+}
+
+a {color:inherit}
+button {font-family:inherit;cursor:pointer}
+
+.sidebar {
+ position:fixed;
+ left:0;
+ top:0;
+ width:245px;
+ height:100vh;
+ background:#0d1428;
+ border-right:1px solid var(--border);
+ padding:25px 17px;
+ z-index:20;
+ overflow-y:auto;
+}
+
+.logo {
+ font-weight:900;
+ font-size:18px;
+ color:white;
+ margin-bottom:35px;
+}
+
+.logo span {color:var(--cyan)}
+
+.logo small {
+ display:block;
+ color:#9daac9;
+ font-size:10px;
+ letter-spacing:3px;
+}
+
+.menu-title {
+ font-size:10px;
+ color:#7483a6;
+ letter-spacing:2px;
+ margin:22px 10px 10px;
+}
+
+.sidebar a {
+ display:block;
+ text-decoration:none;
+ color:#aab6d1;
+ padding:12px 13px;
+ border-radius:10px;
+ font-size:13px;
+ margin:5px 0;
+ transition:.25s;
+}
+
+.sidebar a:hover {
+ background:#253254;
+ color:white;
+ transform:translateX(5px);
+}
+
+.sidebar .author {
+ margin-top:35px;
+ padding:15px;
+ background:#18233e;
+ border-radius:12px;
+ font-size:12px;
+ color:#cbd5e1;
+}
+
+main {margin-left:245px}
+
+.topbar {
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:17px 5%;
+ border-bottom:1px solid var(--border);
+ background:rgba(10,15,30,.8);
+ backdrop-filter:blur(12px);
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+
+.topbar span {
+ font-size:12px;
+ color:var(--muted);
+}
+
+.theme-btn,.mobile-btn {
+ background:var(--panel2);
+ color:var(--white);
+ border:1px solid var(--border);
+ padding:9px 13px;
+ border-radius:9px;
+}
+
+.mobile-btn {display:none}
+
+.hero {
+ min-height:560px;
+ padding:95px 7%;
+ display:flex;
+ align-items:center;
+ background:
+ radial-gradient(ellipse at 80% 35%,#593d9850,transparent 40%),
+ radial-gradient(ellipse at 20% 80%,#007f9c35,transparent 40%),
+ linear-gradient(120deg,#101a35,#11142b);
+ position:relative;
+ overflow:hidden;
+}
+
+.hero:before,.hero:after {
+ content:"";
+ position:absolute;
+ border:1px solid #8b7cf455;
+ width:330px;
+ height:330px;
+ border-radius:50%;
+ right:9%;
+ top:15%;
+ animation:float 7s infinite ease-in-out;
+}
+
+.hero:after {
+ width:230px;
+ height:230px;
+ right:13%;
+ top:24%;
+ animation-delay:1s;
+}
+
+@keyframes float {
+ 50% {transform:translateY(-22px) rotate(15deg)}
+}
+
+.hero-content {
+ max-width:650px;
+ position:relative;
+ z-index:2;
+}
+
+.tag {
+ display:inline-block;
+ border:1px solid #4de5e077;
+ padding:7px 13px;
+ border-radius:30px;
+ color:var(--cyan);
+ font-size:11px;
+ letter-spacing:1px;
+}
+
+.hero h1 {
+ font-size:clamp(36px,5vw,65px);
+ line-height:1.1;
+ margin:25px 0;
+}
+
+.gradient {
+ background:linear-gradient(90deg,#a78bfa,#4de5e0,#ec8aff);
+ -webkit-background-clip:text;
+ color:transparent;
+}
+
+.hero p {
+ color:#bac6e1;
+ max-width:560px;
+}
+
+.hero-btn {
+ display:inline-block;
+ text-decoration:none;
+ background:linear-gradient(90deg,#8262e8,#30bfc6);
+ padding:14px 24px;
+ border-radius:10px;
+ color:white;
+ font-weight:700;
+ margin-top:20px;
+ box-shadow:0 8px 25px #6d5bd544;
+}
+
+.stats {
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px;
+ padding:30px 5%;
+}
+
+.stat {
+ background:var(--panel);
+ border:1px solid var(--border);
+ padding:20px;
+ border-radius:15px;
+ text-align:center;
+}
+
+.stat strong {
+ display:block;
+ color:var(--cyan);
+ font-size:25px;
+}
+
+.stat span {
+ font-size:11px;
+ color:var(--muted);
+}
+
+.content {
+ padding:20px 5% 60px;
+ max-width:1300px;
+ margin:auto;
+}
+
+section {
+ margin:35px 0;
+ padding:30px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:19px;
+ scroll-margin-top:90px;
+}
+
+.section-label {
+ font-size:11px;
+ color:var(--cyan);
+ letter-spacing:2px;
+ font-weight:700;
+}
+
+h2 {
+ font-size:28px;
+ margin:8px 0 20px;
+}
+
+h3 {color:var(--purple)}
+p {color:var(--muted)}
+
+.grid {
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:15px;
+}
+
+.card {
+ background:var(--panel2);
+ padding:21px;
+ border:1px solid var(--border);
+ border-radius:15px;
+ transition:.3s;
+}
+
+.card:hover {
+ transform:translateY(-5px);
+ border-color:#a78bfa88;
+ box-shadow:0 10px 30px #0002;
+}
+
+.card .icon {font-size:27px}
+.card h3 {margin:8px 0}
+
+.diagram {
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ align-items:center;
+ gap:10px;
+ padding:25px 0;
+}
+
+.node {
+ background:linear-gradient(135deg,#342d69,#175a70);
+ padding:16px 20px;
+ border-radius:12px;
+ text-align:center;
+ border:1px solid #72dbe888;
+ min-width:110px;
+}
+
+.arrow {
+ color:var(--cyan);
+ font-size:22px;
+}
+
+.note {
+ border-left:3px solid var(--cyan);
+ background:var(--panel2);
+ padding:15px 18px;
+ border-radius:0 10px 10px 0;
+ margin:20px 0;
+}
+
+.quiz-question {
+ background:var(--panel2);
+ padding:17px;
+ border-radius:12px;
+ margin:15px 0;
+}
+
+.quiz-question label {
+ display:block;
+ color:var(--muted);
+ margin:8px 0;
+ cursor:pointer;
+}
+
+.quiz-question input {accent-color:#a78bfa}
+
+.action {
+ background:linear-gradient(90deg,#795ce5,#259ea9);
+ color:white;
+ border:0;
+ padding:12px 20px;
+ border-radius:9px;
+ font-weight:700;
+}
+
+.result {
+ margin-top:15px;
+ padding:14px;
+ border-radius:10px;
+ background:var(--panel2);
+}
+
+.progress {
+ height:9px;
+ background:var(--panel2);
+ border-radius:10px;
+ overflow:hidden;
+ margin:15px 0;
+}
+
+.progress-bar {
+ height:100%;
+ background:linear-gradient(90deg,#a78bfa,#4de5e0);
+ width:0%;
+ transition:.4s;
+}
+
+.game-options {
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+}
+
+.game-options button {
+ background:var(--panel2);
+ color:var(--white);
+ border:1px solid var(--border);
+ padding:12px 18px;
+ border-radius:9px;
+}
+
+.game-options button:hover {
+ border-color:var(--cyan);
+}
+
+footer {
+ background:#080d19;
+ padding:40px 20px;
+ text-align:center;
+ border-top:1px solid var(--border);
+ color:#aab6d1;
+}
+
+footer strong {color:var(--cyan)}
+
+@media(max-width:850px) {
+ .sidebar {
+  display:none;
+  width:250px;
+ }
+
+ .sidebar.open {display:block}
+ main {margin-left:0}
+ .mobile-btn {display:block}
+
+ .hero {
+  min-height:480px;
+  padding:65px 7%;
+ }
+
+ .hero:before,.hero:after {opacity:.25}
+ .stats {grid-template-columns:1fr}
+ section {padding:20px}
+}
+
+/* SECCIÓN DE VIDEOS */
+
+.section-description {
+ text-align:center;
+ margin-bottom:30px;
+ color:#b8b8d8;
+}
+
+.videos-container {
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+ gap:25px;
+ margin-top:30px;
+}
+
+.video-card {
+ background:rgba(255,255,255,.07);
+ border:1px solid rgba(0,220,255,.3);
+ border-radius:18px;
+ padding:15px;
+ transition:.3s;
+}
+
+.video-card:hover {
+ transform:translateY(-6px);
+ box-shadow:0 8px 25px rgba(0,220,255,.2);
+}
+
+.video-frame {
+ position:relative;
+ width:100%;
+ aspect-ratio:16 / 9;
+ overflow:hidden;
+ border-radius:12px;
+}
+
+.video-frame iframe {
+ width:100%;
+ height:100%;
+ border:none;
+}
+
+.video-card h3 {
+ color:#00e5ff;
+ margin-top:18px;
+}
+
+.video-card p {
+ color:#ddddf5;
+ line-height:1.5;
+}
+
+/* IMÁGENES EDUCATIVAS */
+
+.image-gallery {
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:16px;
+ margin:22px 0;
+}
+
+.learning-image {
+ margin:0;
+ overflow:hidden;
+ border:1px solid var(--border);
+ border-radius:15px;
+ background:var(--panel2);
+}
+
+.learning-image img {
+ display:block;
+ width:100%;
+ height:190px;
+ object-fit:cover;
+ transition:transform .35s ease;
+}
+
+.learning-image:hover img {
+ transform:scale(1.04);
+}
+
+.learning-image figcaption {
+ padding:11px 14px;
+ color:var(--muted);
+ font-size:12px;
+}
+
+/* JUEGOS INTERACTIVOS */
+
+.game-card {margin:18px 0}
+
+.game-heading {
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:10px;
+}
+
+.game-score {
+ color:var(--cyan);
+ background:var(--panel);
+ border:1px solid var(--border);
+ padding:7px 12px;
+ border-radius:20px;
+ font-size:13px;
+}
+
+.game-options,.order-game {
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:15px 0;
+}
+
+.game-options button,.order-game button {
+ background:var(--panel);
+ color:var(--white);
+ border:1px solid var(--border);
+ padding:12px 17px;
+ border-radius:9px;
+ transition:.2s;
+}
+
+.game-options button:hover,.order-game button:hover {
+ border-color:var(--cyan);
+ transform:translateY(-2px);
+}
+
+.game-feedback {
+ min-height:25px;
+ font-weight:600;
+}
+
+/* AJUSTES PARA PANTALLAS PEQUEÑAS */
+
+@media(max-width:520px) {
+ .topbar span {display:none}
+ .hero h1 {font-size:36px}
+ .diagram {gap:7px}
+ .node {min-width:90px;padding:12px 10px}
+ .arrow {font-size:17px}
+}
+
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar">
+ <div class="logo">INFO<span>VERSE.</span><small>LEARNING EXPERIENCE</small></div>
+ <div class="menu-title">NAVEGACIÓN</div>
+ <a href="#inicio">⌂ &nbsp; Inicio</a>
+ <a href="#introduccion">◈ &nbsp; Introducción</a>
+ <a href="#conceptos">▣ &nbsp; Conceptos clave</a>
+ <a href="#modelo">⌘ &nbsp; Modelo de Shannon</a>
+ <a href="#aplicaciones">◉ &nbsp; Aplicaciones</a>
+ <a href="#ejercicios">✎ &nbsp; Ejercicios</a>
+ <a href="#juegos">♧ &nbsp; Juegos</a>
+ <a href="#videos">▷ &nbsp; Videos</a>
+ <a href="#evaluacion">★ &nbsp; Evaluación</a>
+ <a href="#creditos">☷ &nbsp; Créditos</a>
+ <div class="author">
+  <strong>PROYECTO OVA</strong><br>
+  Sharon Anyelin Merchan Galvis<br>
+  Universidad Simón Bolívar · Campus Cúcuta<br>
+  Curso: Teoría General de Sistemas<br>
+  Profesora: Edyy Ortiz<br>
+  Periodo 2026-2
+ </div>
+</aside>
+
+<main>
+<div class="topbar">
+ <button class="mobile-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menú</button>
+ <span>UNIVERSO DIGITAL DEL CONOCIMIENTO</span>
+ <button class="theme-btn" onclick="document.body.classList.toggle('light')">☼ Cambiar tema</button>
+</div>
+
+<header class="hero" id="inicio">
+ <div class="hero-content">
+  <span class="tag">✦ OBJETO VIRTUAL DE APRENDIZAJE</span>
+  <h1>TEORÍA DE LA <span class="gradient">INFORMACIÓN</span></h1>
+  <p>
+   Explora el fascinante mundo de los mensajes, las señales y la comunicación.
+   Aprende cómo se transmite la información y cómo los sistemas la utilizan.
+  </p>
+  <p><strong style="color:white">AUTORA: SHARON ANYELIN MERCHAN GALVIS</strong></p>
+  <a class="hero-btn" href="#introduccion">COMENZAR EXPERIENCIA →</a>
+ </div>
+</header>
+
+<div class="stats">
+ <div class="stat"><strong>01</strong><span>APRENDE CONCEPTOS</span></div>
+ <div class="stat"><strong>02</strong><span>INTERACTÚA Y JUEGA</span></div>
+ <div class="stat"><strong>03</strong><span>DEMUESTRA LO APRENDIDO</span></div>
+</div>
+
+<div class="content">
+
+<section id="introduccion">
+ <div class="section-label">01 / CONOCE EL TEMA</div>
+ <h2>Bienvenido al universo de la información</h2>
+ <p>
+ La Teoría de la Información estudia cómo se representa, transmite,
+ recibe y mide la información. Su desarrollo permitió comprender
+ mejor los procesos de comunicación y mejorar los sistemas
+ tecnológicos que utilizamos diariamente.
+ </p>
+ <div class="note">
+ <strong>OBJETIVO DE APRENDIZAJE</strong>
+ <p>Comprender los fundamentos de la Teoría de la Información,
+ reconocer sus elementos y analizar su importancia en los sistemas
+ de comunicación y en la vida cotidiana.</p>
+ </div>
+ <h3>¿Por qué debemos estudiarla?</h3>
+ <p>Porque vivimos en una sociedad donde constantemente enviamos,
+ recibimos, almacenamos y procesamos información. Desde un mensaje
+ de celular hasta una red informática, todos estos procesos
+ necesitan transmitir información correctamente.</p>
+</section>
+
+<section id="conceptos">
+ <div class="section-label">02 / FUNDAMENTOS</div>
+ <h2>Conceptos fundamentales</h2>
+ <p>Conoce los elementos principales que permiten comprender esta teoría.</p>
+
+ <div class="image-gallery">
+  <figure class="learning-image">
+   <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=85" alt="Personas trabajando con información y tecnología">
+   <figcaption>La información conecta personas y sistemas.</figcaption>
+  </figure>
+  <figure class="learning-image">
+   <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=85" alt="Servidores y redes de comunicación">
+   <figcaption>Las redes permiten transmitir datos.</figcaption>
+  </figure>
+ </div>
+
+ <div class="grid">
+  <div class="card"><div class="icon">📡</div><h3>Información</h3><p>Contenido que se transmite mediante mensajes y que permite reducir la incertidumbre.</p></div>
+  <div class="card"><div class="icon">💬</div><h3>Comunicación</h3><p>Proceso por el cual un emisor transmite un mensaje a un receptor.</p></div>
+  <div class="card"><div class="icon">📊</div><h3>Entropía</h3><p>Medida de la incertidumbre asociada a una fuente de información.</p></div>
+  <div class="card"><div class="icon">⚡</div><h3>Ruido</h3><p>Interferencia que puede alterar una señal durante la transmisión.</p></div>
+  <div class="card"><div class="icon">🌐</div><h3>Canal</h3><p>Medio utilizado para transportar la información de un punto a otro.</p></div>
+  <div class="card"><div class="icon">🔐</div><h3>Codificación</h3><p>Proceso de representar un mensaje mediante un código para transmitirlo.</p></div>
+ </div>
+
+ <div class="note">
+  <strong>RECUERDA:</strong>
+  <p>La información puede transmitirse mediante sonidos, imágenes,
+  textos, señales digitales y diferentes medios tecnológicos.</p>
+ </div>
+</section>
+
+<section id="modelo">
+ <div class="section-label">03 / MODELO TEÓRICO</div>
+ <h2>Modelo de Shannon y Weaver</h2>
+ <p>
+ Claude Shannon publicó en 1948 su teoría matemática de la comunicación.
+ Warren Weaver contribuyó a su difusión y explicación.
+ Este modelo describe los componentes de un proceso de transmisión.
+ </p>
+
+ <div class="diagram">
+  <div class="node">📤<br><b>Fuente</b></div>
+  <span class="arrow">→</span>
+  <div class="node">📡<br><b>Transmisor</b></div>
+  <span class="arrow">→</span>
+  <div class="node">🌐<br><b>Canal</b></div>
+  <span class="arrow">→</span>
+  <div class="node">📥<br><b>Receptor</b></div>
+  <span class="arrow">→</span>
+  <div class="node">🎯<br><b>Destino</b></div>
+ </div>
+
+ <div class="card">
+  <h3>⚠ ¿Dónde aparece el ruido?</h3>
+  <p>El ruido puede interferir durante la transmisión por el canal,
+  alterando o dificultando la recepción de la señal.</p>
+ </div>
+
+ <div class="grid">
+  <div class="card"><h3>Fuente</h3><p>Es quien produce o selecciona el mensaje.</p></div>
+  <div class="card"><h3>Transmisor</h3><p>Convierte el mensaje en una señal que puede enviarse.</p></div>
+  <div class="card"><h3>Canal</h3><p>Es el medio por donde viaja la señal.</p></div>
+  <div class="card"><h3>Receptor</h3><p>Recibe y decodifica la señal transmitida.</p></div>
+  <div class="card"><h3>Destino</h3><p>Es la persona o sistema al que va dirigido el mensaje.</p></div>
+  <div class="card"><h3>Ruido</h3><p>Es cualquier interferencia que afecta la transmisión.</p></div>
+ </div>
+
+ <div class="note">
+ <strong>RELACIÓN CON LA TGS</strong>
+ <p>La información permite que los componentes de un sistema
+ intercambien datos, coordinen sus actividades y generen respuestas
+ frente a diferentes situaciones.</p>
+ </div>
+</section>
+
+<section id="aplicaciones">
+ <div class="section-label">04 / VIDA COTIDIANA</div>
+ <h2>La teoría en el mundo real</h2>
+ <div class="grid">
+  <div class="card"><div class="icon">📱</div><h3>Llamadas telefónicas</h3><p>La voz se transforma en señales que viajan por una red hasta llegar al teléfono receptor.</p></div>
+  <div class="card"><div class="icon">💻</div><h3>Internet</h3><p>Los datos se codifican y transmiten entre dispositivos mediante redes de comunicación.</p></div>
+  <div class="card"><div class="icon">🏫</div><h3>Universidades</h3><p>Los profesores transmiten información a sus estudiantes mediante clases, plataformas y correos.</p></div>
+  <div class="card"><div class="icon">📺</div><h3>Televisión</h3><p>Una señal audiovisual se transmite para que los televisores puedan recibirla y reproducirla.</p></div>
+ </div>
+</section>
+
+<section id="ejercicios">
+ <div class="section-label">05 / PRACTICA</div>
+ <h2>Ejercicios de aprendizaje</h2>
+ <p>Selecciona la respuesta correcta y comprueba cuánto has aprendido.</p>
+
+ <div class="card">
+  <h3>Ejercicio 1</h3>
+  <p>¿Qué elemento puede alterar la transmisión de un mensaje?</p>
+  <select id="e1">
+   <option value="">Selecciona...</option>
+   <option value="a">El ruido</option>
+   <option value="b">El destino</option>
+   <option value="c">La fuente</option>
+  </select>
+  <button class="action" onclick="check('e1','a','r1')">Comprobar</button>
+  <p id="r1"></p>
+ </div>
+
+ <div class="card">
+  <h3>Ejercicio 2</h3>
+  <p>¿Cuál es la función del canal?</p>
+  <select id="e2">
+   <option value="">Selecciona...</option>
+   <option value="a">Crear información</option>
+   <option value="b">Transportar la señal</option>
+   <option value="c">Eliminar el mensaje</option>
+  </select>
+  <button class="action" onclick="check('e2','b','r2')">Comprobar</button>
+  <p id="r2"></p>
+ </div>
+
+ <div class="card">
+  <h3>Ejercicio 3</h3>
+  <p>¿Quién desarrolló la teoría matemática de la comunicación?</p>
+  <select id="e3">
+   <option value="">Selecciona...</option>
+   <option value="a">Isaac Newton</option>
+   <option value="b">Albert Einstein</option>
+   <option value="c">Claude Shannon</option>
+  </select>
+  <button class="action" onclick="check('e3','c','r3')">Comprobar</button>
+  <p id="r3"></p>
+ </div>
+</section>
+
+<section id="juegos">
+ <div class="section-label">06 / APRENDE JUGANDO</div>
+ <h2>Zona de juegos interactivos</h2>
+ <p>Resuelve los retos, gana puntos y comprueba tus conocimientos.</p>
+
+ <div class="card game-card">
+  <div class="game-heading">
+   <h3>🎮 Juego 1: ¿Quién soy?</h3>
+   <span class="game-score">Puntos: <b id="gameScore">0</b></span>
+  </div>
+  <p id="gameQuestion">Soy el medio por donde viaja la información. ¿Quién soy?</p>
+  <div class="game-options" id="whoOptions">
+   <button type="button" onclick="play(0)">Emisor</button>
+   <button type="button" onclick="play(1)">Canal</button>
+   <button type="button" onclick="play(2)">Ruido</button>
+  </div>
+  <p class="game-feedback" id="gameResult" aria-live="polite"></p>
+  <button class="action" onclick="nextGame()">Siguiente reto →</button>
+ </div>
+
+ <div class="card game-card">
+  <h3>🧩 Juego 2: Detecta el problema</h3>
+  <p>Una estudiante está en una videollamada. Su conexión falla y no logra escuchar bien al profesor.</p>
+  <p><strong>¿Qué elemento está afectando la comunicación?</strong></p>
+  <div class="game-options">
+   <button type="button" onclick="noise('ruido')">Ruido</button>
+   <button type="button" onclick="noise('fuente')">Fuente</button>
+   <button type="button" onclick="noise('destino')">Destino</button>
+  </div>
+  <p class="game-feedback" id="noiseResult" aria-live="polite"></p>
+ </div>
+
+ <div class="card game-card">
+  <h3>⚡ Juego 3: Ordena el proceso</h3>
+  <p>Selecciona los elementos en el orden en que viaja un mensaje en el modelo de Shannon y Weaver.</p>
+  <div class="order-game">
+   <button type="button" onclick="chooseOrder('Fuente')">Fuente</button>
+   <button type="button" onclick="chooseOrder('Transmisor')">Transmisor</button>
+   <button type="button" onclick="chooseOrder('Canal')">Canal</button>
+   <button type="button" onclick="chooseOrder('Receptor')">Receptor</button>
+   <button type="button" onclick="chooseOrder('Destino')">Destino</button>
+  </div>
+  <p id="orderProgress">Elementos seleccionados: 0 de 5</p>
+  <p class="game-feedback" id="orderResult" aria-live="polite"></p>
+  <button class="action" onclick="resetOrder()">Volver a jugar</button>
+ </div>
+</section>
+
+<section id="videos">
+ <div class="section-label">07 / CONTENIDO AUDIOVISUAL</div>
+ <h2>Explora y aprende con videos</h2>
+ <p>Consulta estos recursos audiovisuales para complementar el tema:</p>
+ <div class="videos-container">
+  <div class="video-card">
+   <div class="video-frame"><iframe src="https://www.youtube.com/embed/F7RoPCV2Lsw" title="Modelo de Shannon y Weaver" allowfullscreen loading="lazy"></iframe></div>
+   <h3>Modelo de Shannon y Weaver</h3>
+   <p>Conoce los elementos que intervienen en el proceso de comunicación.</p>
+  </div>
+  <div class="video-card">
+   <div class="video-frame"><iframe src="https://www.youtube.com/embed/qAbegfjieVk" title="Teoría de la Información" allowfullscreen loading="lazy"></iframe></div>
+   <h3>Teoría de la Información</h3>
+   <p>Aprende sobre los fundamentos de esta teoría y sus principales ideas.</p>
+  </div>
+  <div class="video-card">
+   <div class="video-frame"><iframe src="https://www.youtube.com/embed/a1Qn1TGxMEs" title="Comunicación y transmisión" allowfullscreen loading="lazy"></iframe></div>
+   <h3>Comunicación y transmisión</h3>
+   <p>Comprende cómo se transmite un mensaje y cómo puede intervenir el ruido.</p>
+  </div>
+ </div>
+</section>
+
+<section id="evaluacion">
+ <div class="section-label">08 / DEMUESTRA LO APRENDIDO</div>
+ <h2>Evaluación final</h2>
+ <p>Responde las cinco preguntas. Cada respuesta correcta vale 20 puntos.</p>
+ <div class="progress"><div class="progress-bar" id="bar"></div></div>
+ <p id="progressText">0 de 5 preguntas respondidas</p>
+
+ <form id="quiz">
+  <div class="quiz-question">
+   <b>1. ¿Qué estudia la Teoría de la Información?</b>
+   <label><input type="radio" name="p1" value="a"> La transmisión y medición de la información</label>
+   <label><input type="radio" name="p1" value="b"> El movimiento de los planetas</label>
+   <label><input type="radio" name="p1" value="c"> El crecimiento de las plantas</label>
+  </div>
+
+  <div class="quiz-question">
+   <b>2. ¿Quién desarrolló la teoría matemática de la comunicación?</b>
+   <label><input type="radio" name="p2" value="a"> Isaac Newton</label>
+   <label><input type="radio" name="p2" value="b"> Claude Shannon</label>
+   <label><input type="radio" name="p2" value="c"> Charles Darwin</label>
+  </div>
+
+  <div class="quiz-question">
+   <b>3. ¿Qué es el ruido?</b>
+   <label><input type="radio" name="p3" value="a"> Una interferencia</label>
+   <label><input type="radio" name="p3" value="b"> El receptor</label>
+   <label><input type="radio" name="p3" value="c"> El mensaje original</label>
+  </div>
+
+  <div class="quiz-question">
+   <b>4. ¿Cuál es la función del receptor?</b>
+   <label><input type="radio" name="p4" value="a"> Producir el mensaje</label>
+   <label><input type="radio" name="p4" value="b"> Recibir y decodificar la señal</label>
+   <label><input type="radio" name="p4" value="c"> Interferir en el canal</label>
+  </div>
+
+  <div class="quiz-question">
+   <b>5. ¿Qué representa la entropía?</b>
+   <label><input type="radio" name="p5" value="a"> La velocidad del receptor</label>
+   <label><input type="radio" name="p5" value="b"> La cantidad de personas</label>
+   <label><input type="radio" name="p5" value="c"> La incertidumbre de una fuente</label>
+  </div>
+
+  <button type="button" class="action" onclick="grade()">FINALIZAR EVALUACIÓN ✦</button>
+ </form>
+
+ <div class="result" id="quizResult">Tu calificación aparecerá aquí.</div>
+</section>
+
+<section id="creditos">
+ <div class="section-label">09 / INFORMACIÓN DEL PROYECTO</div>
+ <h2>Créditos y bibliografía</h2>
+
+ <div class="card credits-card">
+  <h3>Datos académicos</h3>
+  <p><strong>Autora:</strong> Sharon Anyelin Merchan Galvis</p>
+  <p><strong>Universidad:</strong> Universidad Simón Bolívar</p>
+  <p><strong>Campus:</strong> Cúcuta</p>
+  <p><strong>Profesora:</strong> Edyy Ortiz</p>
+  <p><strong>Curso:</strong> Teoría General de Sistemas</p>
+  <p><strong>Tema:</strong> Teoría de la Información</p>
+  <p><strong>Periodo:</strong> 2026-2</p>
+ </div>
+
+ <h3>Referencias bibliográficas</h3>
+ <ol>
+  <li>Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell System Technical Journal, 27(3), 379–423. <a target="_blank" rel="noopener" href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">Consultar DOI</a>.</li>
+  <li>Shannon, C. E., &amp; Weaver, W. (1949). The Mathematical Theory of Communication. University of Illinois Press.</li>
+  <li>Weaver, W. (1949). Recent Contributions to the Mathematical Theory of Communication. En The Mathematical Theory of Communication. University of Illinois Press.</li>
+ </ol>
+
+ <h3>Herramientas utilizadas</h3>
+ <p>HTML, CSS y JavaScript para el desarrollo web; ChatGPT como herramienta de apoyo para la organización de ideas, elaboración y revisión del código.</p>
+</section>
+
+</div>
+
+<footer>
+ <h2>INFO<span style="color:#4de5e0">VERSE.</span></h2>
+ <p>El conocimiento comienza con la información.</p>
+ <p>OVA desarrollado por <strong>Sharon Anyelin Merchan Galvis</strong></p>
+ <p>Universidad Simón Bolívar · Campus Cúcuta</p>
+ <p>Curso: Teoría General de Sistemas · 2026-2</p>
+</footer>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+if (!window.__ovaInitialized) {
+window.__ovaInitialized = true;
+// COMPROBAR LOS EJERCICIOS
+
+function check(id, correct, result) {
+ const value = document.getElementById(id).value;
+ const out = document.getElementById(result);
+
+ if (!value) {
+  out.textContent = "Selecciona una respuesta.";
+  out.style.color = "#ec8aff";
+ } else if (value === correct) {
+  out.textContent = "✓ ¡Excelente! Tu respuesta es correcta.";
+  out.style.color = "#4de5e0";
+ } else {
+  out.textContent = "✗ No es correcto. Vuelve a intentarlo.";
+  out.style.color = "#ff8caa";
+ }
+}
+
+
+// JUEGO 1: ¿QUIÉN SOY?
+
+let gameIndex = 0;
+let score = 0;
+let answeredCurrent = false;
+
+const questions = [
+ {
+  q: "Soy el medio por donde viaja la información. ¿Quién soy?",
+  options: ["Emisor", "Canal", "Ruido"],
+  answer: 1
+ },
+ {
+  q: "Soy quien produce o selecciona el mensaje. ¿Quién soy?",
+  options: ["Fuente", "Receptor", "Canal"],
+  answer: 0
+ },
+ {
+  q: "Soy la interferencia que puede alterar una señal. ¿Quién soy?",
+  options: ["Destino", "Transmisor", "Ruido"],
+  answer: 2
+ },
+ {
+  q: "Recibo y decodifico la señal. ¿Quién soy?",
+  options: ["Receptor", "Fuente", "Ruido"],
+  answer: 0
+ },
+ {
+  q: "Soy el punto al que va dirigido el mensaje. ¿Quién soy?",
+  options: ["Canal", "Destino", "Transmisor"],
+  answer: 1
+ }
+];
+
+function showQuestion() {
+ const question = questions[gameIndex];
+
+ document.getElementById("gameQuestion").textContent = question.q;
+
+ const optionsBox = document.getElementById("whoOptions");
+ optionsBox.innerHTML = "";
+
+ question.options.forEach((option, index) => {
+  const button = document.createElement("button");
+
+  button.type = "button";
+  button.textContent = option;
+  button.onclick = function () {
+   play(index);
+  };
+
+  optionsBox.appendChild(button);
+ });
+
+ document.getElementById("gameResult").textContent = "";
+ answeredCurrent = false;
+}
+
+function play(answer) {
+ const out = document.getElementById("gameResult");
+
+ if (answeredCurrent) {
+  out.textContent = "Presiona ‘Siguiente reto’ para continuar.";
+  return;
+ }
+
+ if (answer === questions[gameIndex].answer) {
+  out.textContent = "🌟 ¡Correcto! Ganaste 10 puntos.";
+  out.style.color = "#4de5e0";
+
+  score += 10;
+  document.getElementById("gameScore").textContent = score;
+
+ } else {
+  out.textContent = "No es correcto. La respuesta era: " +
+   questions[gameIndex].options[questions[gameIndex].answer] + ".";
+
+  out.style.color = "#ec8aff";
+ }
+
+ answeredCurrent = true;
+}
+
+function nextGame() {
+ gameIndex = (gameIndex + 1) % questions.length;
+ showQuestion();
+}
+
+
+// JUEGO 2: DETECTA EL PROBLEMA
+
+function noise(value) {
+ const out = document.getElementById("noiseResult");
+
+ if (value === "ruido") {
+  out.textContent = "✓ ¡Muy bien! El ruido está afectando la señal. +10 puntos.";
+  out.style.color = "#4de5e0";
+
+  if (!window.noiseAnswered) {
+   score += 10;
+   document.getElementById("gameScore").textContent = score;
+   window.noiseAnswered = true;
+  }
+
+ } else {
+  out.textContent = "Inténtalo nuevamente. Piensa qué puede interferir con la señal.";
+  out.style.color = "#ec8aff";
+ }
+}
+
+
+// JUEGO 3: ORDENA EL PROCESO
+
+const correctOrder = [
+ "Fuente",
+ "Transmisor",
+ "Canal",
+ "Receptor",
+ "Destino"
+];
+
+let selectedOrder = [];
+
+function chooseOrder(element) {
+ const out = document.getElementById("orderResult");
+
+ if (selectedOrder.includes(element)) {
+  out.textContent = "Ese elemento ya fue seleccionado.";
+  out.style.color = "#ec8aff";
+  return;
+ }
+
+ selectedOrder.push(element);
+
+ document.getElementById("orderProgress").textContent =
+  "Elementos seleccionados: " + selectedOrder.length + " de 5";
+
+ if (selectedOrder.length === 5) {
+
+  if (selectedOrder.every((item, index) => item === correctOrder[index])) {
+
+   out.textContent = "🏆 ¡Excelente! Ordenaste correctamente el proceso. +20 puntos.";
+   out.style.color = "#4de5e0";
+
+   if (!window.orderWon) {
+    score += 20;
+    document.getElementById("gameScore").textContent = score;
+    window.orderWon = true;
+   }
+
+  } else {
+   out.textContent = "El orden no es correcto. Presiona ‘Volver a jugar’ e inténtalo otra vez.";
+   out.style.color = "#ec8aff";
+  }
+
+ } else {
+  out.textContent = "Seleccionaste: " + selectedOrder.join(" → ");
+  out.style.color = "#a5b0ce";
+ }
+}
+
+function resetOrder() {
+ selectedOrder = [];
+
+ document.getElementById("orderProgress").textContent =
+  "Elementos seleccionados: 0 de 5";
+
+ document.getElementById("orderResult").textContent = "";
+}
+
+
+// EVALUACIÓN FINAL
+
+const form = document.getElementById("quiz");
+
+form.addEventListener("change", function () {
+
+ let answered = 0;
+
+ for (let i = 1; i <= 5; i++) {
+  if (document.querySelector('input[name="p' + i + '"]:checked')) {
+   answered++;
+  }
+ }
+
+ document.getElementById("bar").style.width =
+  (answered * 20) + "%";
+
+ document.getElementById("progressText").textContent =
+  answered + " de 5 preguntas respondidas";
+});
+
+
+function grade() {
+
+ const answers = {
+  p1: "a",
+  p2: "b",
+  p3: "a",
+  p4: "b",
+  p5: "c"
+ };
+
+ let scoreQuiz = 0;
+ let answered = 0;
+
+ for (let p in answers) {
+
+  const selected = document.querySelector(
+   'input[name="' + p + '"]:checked'
+  );
+
+  if (selected) {
+   answered++;
+
+   if (selected.value === answers[p]) {
+    scoreQuiz++;
+   }
+  }
+ }
+
+ const result = document.getElementById("quizResult");
+
+ if (answered !== 5) {
+  result.textContent =
+   "⚠ Responde todas las preguntas antes de finalizar.";
+
+  return;
+ }
+
+ const finalGrade = scoreQuiz * 20;
+
+ result.innerHTML =
+  "<h2>¡Evaluación terminada!</h2>" +
+  "<h3>Tu puntaje: " + finalGrade + "/100</h3>" +
+  "<p>Respuestas correctas: " + scoreQuiz + " de 5.</p>" +
+
+  (scoreQuiz >= 4
+   ? "🏆 ¡Excelente! Dominas muy bien el tema."
+   : scoreQuiz >= 3
+   ? "👏 ¡Buen trabajo! Sigue repasando."
+   : "📚 Repasa los conceptos y vuelve a intentarlo.");
+
+ result.scrollIntoView({
+  behavior: "smooth",
+  block: "center"
+ });
+}
+
+
+// MOSTRAR LA PRIMERA PREGUNTA AL CARGAR LA PÁGINA
+
+showQuestion();
+
+}
+</script>
+</body>
+</html>

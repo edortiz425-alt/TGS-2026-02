@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OVA de Teoría General de Sistemas sobre el caos determinista y el mapa logístico.">
+<title>Créditos · Laboratorio del Caos</title>
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<script defer src="../js/main.js"></script>
+<script defer src="../js/visor-ficha.js"></script>
+</head>
+<body id="arriba">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <div class="identity">
+      <img class="header-logo" src="../assets/imagenes/logo-unisimon.png" alt="Universidad Simón Bolívar" width="62" height="40">
+      <a class="brand" href="index.html">Laboratorio<span> del Caos</span></a>
+    </div>
+    <button type="button" id="menu" class="menu" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav id="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="teoria.html">Teoría</a><a href="simulador.html">Simulador</a><a href="juegos.html">Juegos</a><a href="quiz.html">Evaluación</a><a href="creditos.html" aria-current="page">Créditos</a></nav>
+  </div>
+</header>
+<main id="contenido">
+  <section id="creditos" class="section shell page-section credits-page">
+    <p class="label">Teoría General de Sistemas</p>
+    <h1>Créditos</h1>
+    <article class="author-feature" aria-labelledby="autor">
+      <img class="author-photo" src="../assets/imagenes/brayhan.jpg" alt="Retrato de Brayhan Alejandro Gomez Vega" width="245">
+      <div>
+        <p class="label">Autor del OVA · Proyecto 7</p>
+        <h2 id="autor">BRAYHAN ALEJANDRO GOMEZ VEGA</h2>
+        <ul class="credit-meta">
+          <li>Ingeniería de Sistemas · Segundo semestre</li>
+          <li>Universidad Simón Bolívar · sede Cúcuta</li>
+          <li>Teoría General de Sistemas · 2026-2</li>
+        </ul>
+        <img class="credits-logo" src="../assets/imagenes/logo-unisimon.png" alt="Logo de la Universidad Simón Bolívar" width="104">
+      </div>
+    </article>
+    <section class="credit-video" id="video-narrado" aria-labelledby="credit-video-title">
+      <h2 id="credit-video-title">Caos en los sistemas</h2>
+      <p class="video-intro">Video narrado en español. Dos estados iniciales casi iguales muestran cómo el caos limita la capacidad de predecir un sistema.</p>
+      <video class="video" controls playsinline preload="metadata" aria-labelledby="credit-video-title" poster="../assets/videos/caos-en-los-sistemas-narrado.png">
+        <source src="../assets/videos/caos-en-los-sistemas-narrado.mp4" type="video/mp4">
+      </video>
+      <p class="video-fallback"><a href="../assets/videos/caos-en-los-sistemas-narrado.mp4">Abrir MP4</a> · <a href="simulador.html">Probar el simulador</a></p>
+      <details class="video-transcript">
+        <summary>Leer la transcripción</summary>
+          <p>En un sistema determinista, el estado actual y la regla determinan el estado siguiente. Aun así, el futuro puede ser difícil de predecir si conocemos el estado inicial con poca precisión.</p>
+          <p>Probemos el mapa logístico. Las dos curvas usan el mismo parámetro, erre igual a tres coma nueve. Los estados iniciales difieren en una diezmilésima. Al principio las curvas casi se superponen. Después se separan.</p>
+          <p>Si cambiamos erre a tres coma dos, la trayectoria termina alternando entre dos valores. Con erre igual a tres coma nueve aparece una evolución irregular. La regla sigue siendo determinista.</p>
+          <p>En Teoría General de Sistemas, esto ayuda a entender los límites de una predicción. Cada estado se convierte en la entrada del paso siguiente. El caos determinista también puede observarse en un circuito real, como el de Chua. En el simulador puedes comparar ambos regímenes.</p>
+      </details>
+      <p class="video-note">Elaboración propia del OVA. La explicación se basa en <a href="#campos-2002">Campos (2002)</a> y <a href="#campos-1996">Campos Romero (1996)</a>.</p>
+    </section>
+    <section class="doc-preview" aria-labelledby="titulo-ficha">
+      <a href="../docs/FICHA%20TECNICA%20OVA%20BRAYHAN.pdf" class="doc-thumb" aria-label="Abrir el PDF original"><img src="../assets/ficha/portada.jpg" width="170" alt="Portada de la ficha técnica del OVA de Brayhan Alejandro Gomez Vega"></a>
+      <div>
+        <h2 id="titulo-ficha">FICHA TECNICA OVA BRAYHAN</h2>
+        <p>Documento del proyecto · PDF · 7 páginas</p>
+        <div class="choices">
+          <a id="abrir-ficha" class="button primary" href="../docs/FICHA%20TECNICA%20OVA%20BRAYHAN.pdf">Ver en pantalla completa</a>
+          <a class="button" href="../docs/FICHA%20TECNICA%20OVA%20BRAYHAN.pdf" download="FICHA TECNICA OVA BRAYHAN.pdf">Descargar PDF</a>
+        </div>
+      </div>
+    </section>
+    <dialog id="visor-ficha" aria-label="FICHA TECNICA OVA BRAYHAN">
+      <div class="doc-toolbar">
+        <button type="button" id="doc-prev">Anterior</button>
+        <output id="doc-status" aria-live="polite">1 de 7</output>
+        <button type="button" id="doc-next">Siguiente</button>
+        <a href="../docs/FICHA%20TECNICA%20OVA%20BRAYHAN.pdf" target="_blank" rel="noopener">Abrir PDF original</a>
+        <button type="button" id="doc-close" autofocus>Cerrar</button>
+      </div>
+      <div class="doc-sheet"><img id="doc-img" src="../assets/ficha/pagina-1.jpg" alt="Página 1 de 7 de la ficha técnica"></div>
+    </dialog>
+    <div class="credit-sources">
+      <h2>Referencias</h2>
+      <ol class="references">
+        <li id="campos-2002">Campos, D. (2002). Determinismo, caos e impredictibilidad. <cite>Revista de la Academia Colombiana de Ciencias Exactas, Físicas y Naturales, 26</cite>(98), 85–103. <a href="https://doi.org/10.18257/raccefyn.26(98).2002.2755">DOI</a></li>
+        <li id="campos-1996">Campos Romero, D. (1996). Modelo logístico: Un paradigma en la teoría del caos. <cite>Revista de la Academia Colombiana de Ciencias Exactas, Físicas y Naturales, 20</cite>(78), 503–518. <a href="https://doi.org/10.18257/raccefyn.20(78).1996.3043">DOI</a></li>
+        <li id="herrera-2001">Herrera Díaz, L. F., &amp; Conde, A. (2001). Caos, fluidos y flujos. <cite>Ingeniería e Investigación</cite>, (48), 29–39. <a href="https://doi.org/10.15446/ing.investig.n48.21355">DOI</a></li>
+        <li id="lombardi-2001">Lombardi, O. (2001). La teoría del caos y sus problemas epistemológicos. <cite>Revista de Filosofía, 57</cite>, 91–109. <a href="https://doi.org/10.5354/0718-4360.2001.44055">DOI</a></li>
+        <li id="rodriguez-2002">Rodríguez Devis, J. M. (2002). Las organizaciones complejas. <cite>Ingeniería e Investigación</cite>, (50), 90–103. <a href="https://doi.org/10.15446/ing.investig.n50.21428">DOI</a></li>
+      </ol>
+    </div>
+    <div class="credit-notes">
+      <div>
+        <h3>Recursos audiovisuales</h3>
+        <p>El video narrado y las dos animaciones se produjeron para este OVA. Las gráficas se calcularon con el mapa logístico. La narración se creó con síntesis de voz local en español. El retrato y el logo institucional fueron aportados por el estudiante.</p>
+      </div>
+      <div>
+        <h3>Herramientas</h3>
+        <p>El OVA usa HTML, CSS y JavaScript. Se usó OpenAI Codex como apoyo para redactar y programar. Las gráficas de los videos se crearon con Python.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="shell footer"><a href="creditos.html">Créditos del OVA</a><a href="#arriba">Volver arriba ↑</a></footer>
+<noscript>Activa JavaScript para usar las actividades interactivas.</noscript>
+</body>
+</html>

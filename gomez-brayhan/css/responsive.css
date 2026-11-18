@@ -1,0 +1,13 @@
+@media (max-width: 760px) {
+  .shell { width: calc(100% - 2.25rem); }
+  .hero { min-height: 0; padding-block: 3rem; gap: 1.75rem; }
+  .hero, .theory-grid, .case, .sim-layout, .credits { grid-template-columns: 1fr; }
+  .header-inner { flex-wrap: wrap; gap: .4rem; padding-block: .6rem; }
+  nav { width: 100%; flex-wrap: wrap; gap: .4rem 1.1rem; }
+  .has-js .menu { display: inline-flex; }
+  .has-js nav[data-collapsed="true"] { display: none; }
+  canvas { height: 232px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

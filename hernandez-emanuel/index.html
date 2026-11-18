@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Objeto Virtual de Aprendizaje sobre los conceptos fundamentales de la Teoría General de Sistemas.">
+<meta name="theme-color" content="#102c27">
+<title>Conexiones | OVA · Teoría General de Sistemas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+ <div class="wrap nav">
+  <a class="brand" href="#inicio" aria-label="Conexiones, inicio">
+   <img id="uniLogo" src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Logo_de_la_Universidad_Sim%C3%B3n_Bol%C3%ADvar.svg" alt="Logosímbolo oficial de la Universidad Simón Bolívar" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block'">
+   <span id="logoFallback" class="brand-fallback">UNIVERSIDAD<br>SIMÓN BOLÍVAR</span>
+   <span class="brand-course">OVA · TGS</span>
+  </a>
+  <div class="top-xp"><span id="topXp">0 XP</span><span class="top-level" id="topLevel">Aprendiz</span></div><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <nav class="navlinks" id="navlinks" aria-label="Navegación principal">
+   <a href="#contexto">Contexto</a><a href="#conceptos">Conceptos</a><a href="#clasificacion">Clasificación</a><a href="#caso">Caso</a><a href="#practica">Práctica</a><a href="#juegos">Juegos</a><a href="#videos">Videos</a><a href="#evaluacion">Evaluación</a><a href="#creditos">Créditos</a>
+  </nav>
+ </div>
+</header>
+<aside class="learning-sidebar" id="learningSidebar"><div class="sidebar-brand"><span class="sidebar-kicker">TU RECORRIDO</span><strong>Conexiones</strong></div><div class="xp-panel"><div class="xp-heading"><span>Experiencia</span><strong id="xpValue">0 / 750 XP</strong></div><div class="xp-track"><span id="xpBar"></span></div><div class="xp-level" id="xpLevel">Nivel 1 · Aprendiz sistémico</div><div class="xp-caption" id="xpPercent">0 % completado</div></div><nav class="module-nav" aria-label="Módulos del OVA"><a href="#inicio"><span>⌂</span> Inicio</a><a href="#contexto"><span>01</span> Introducción</a><a href="#conceptos"><span>02</span> Conceptos</a><a href="#clasificacion"><span>03</span> Clasificación</a><a href="#caso"><span>04</span> Caso de estudio</a><a href="#practica"><span>05</span> Ejercicios</a><a href="#juegos"><span>06</span> Juegos</a><a href="#videos"><span>07</span> Videos</a><a href="#evaluacion"><span>08</span> Evaluación</a><a href="#creditos"><span>09</span> Créditos</a></nav><div class="medal-panel" id="medalPanel"><div class="medal-icon">✦</div><strong>Medalla legendaria</strong><span id="medalText">Completa todas las actividades con el 100 % para desbloquearla.</span><span class="medal-locked" id="medalStatus">BLOQUEADA</span></div><button class="sidebar-reset" id="resetProgress" type="button">Reiniciar progreso</button></aside><div class="sidebar-scrim" id="sidebarScrim"></div>
+<main class="page-content">
+<section class="hero" id="inicio">
+ <div class="wrap hero-grid">
+  <div>
+   <div class="eyebrow">Ingeniería de Sistemas · Recurso de aprendizaje</div>
+   <h1>Todo está<br><span style="color:var(--lime)">conectado.</span></h1>
+   <p>Explora la Teoría General de Sistemas y descubre cómo las relaciones entre componentes explican el funcionamiento de organizaciones, procesos y tecnologías.</p>
+   <div class="hero-actions"><a class="btn" href="#contexto" data-page-link>Comenzar recorrido <span>↗</span></a><a class="btn secondary" href="#conceptos" data-page-link>Explorar conceptos</a></div>
+   <div class="subline">UNIVERSIDAD SIMÓN BOLÍVAR · SEDE CÚCUTA · TEORÍA GENERAL DE SISTEMAS</div>
+  </div>
+  <div class="hero-art" aria-label="Ilustración abstracta de elementos conectados">
+   <div class="orbit"><div class="core">TGS</div><div class="node n1">↗</div><div class="node n2">◎</div><div class="node n3">⌘</div><div class="node n4">⇄</div></div>
+  </div>
+ </div>
+</section>
+<section class="section" id="contexto">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">01 · Punto de partida</div><h2>Mirar más allá de las partes</h2><p>La Teoría General de Sistemas propone estudiar los fenómenos como totalidades organizadas: no basta con conocer cada elemento, también hay que comprender sus relaciones y el contexto en el que actúan.</p></div>
+  <div class="intro-grid reveal">
+   <article class="panel">
+    <h3>¿Qué es la TGS?</h3>
+    <p>Es un marco interdisciplinario para analizar sistemas de distintas naturalezas —biológicos, sociales, organizacionales o tecnológicos— mediante principios comunes. Ludwig von Bertalanffy impulsó su formulación moderna al cuestionar las explicaciones que aíslan los componentes y dejan de lado la organización del conjunto.</p>
+    <p>En ingeniería de sistemas, esta perspectiva ayuda a definir límites, reconocer actores, modelar entradas y salidas, anticipar efectos indirectos y diseñar soluciones que consideren el entorno.</p>
+    <div class="stats"><div class="stat"><b>01</b><span class="small">Visión integral</span></div><div class="stat"><b>02</b><span class="small">Relaciones</span></div><div class="stat"><b>03</b><span class="small">Adaptación</span></div></div>
+   </article>
+   <aside class="quote"><div class="eyebrow">Idea clave</div><strong>Un sistema no es solamente una colección de elementos: es un conjunto de elementos relacionados que produce un comportamiento organizado.</strong><p class="muted" style="margin-top:18px">Piensa en una universidad: estudiantes, docentes, procesos académicos, plataformas y normas se influyen mutuamente. Cambiar uno puede modificar la experiencia del conjunto.</p></aside>
+  </div>
+ <div class="resource-inline reveal"><h3>🎥 Para ampliar: introducción a la TGS</h3><p>Video breve sobre el concepto de sistema, sus elementos y las premisas de la teoría.</p><a href="https://www.youtube.com/watch?v=-j3Y2mZH4rk" target="_blank" rel="noopener">Ver introducción a la TGS ↗</a><span class="small muted">Relacionado con: contexto, definición de sistema y fundamentos.</span></div>
+ </div>
+</section>
+<section class="section" id="conceptos" style="background:#f7f2fb">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">02 · Marco conceptual</div><h2>Conceptos que explican las conexiones</h2><p>Lee cada principio y observa qué aporta al análisis de un sistema. Los conceptos se complementan; ninguno explica por sí solo toda la complejidad. Los distintos tipos de sistemas se estudian en el apartado Clasificación.</p></div>
+  <div class="concept-grid">
+   <article class="concept reveal"><span class="num">CONCEPTO 01</span><h3>Sistema y totalidad</h3><p>Conjunto de elementos interrelacionados que se comporta como una unidad. La totalidad destaca que las propiedades del conjunto no se explican sumando sus partes de manera aislada.</p><span class="tag">Visión holística</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 02</span><h3>Sinergia</h3><p>La interacción coordinada entre componentes puede producir resultados o capacidades que no aparecen cuando cada parte actúa por separado.</p><span class="tag">Interacción</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 03</span><h3>Recursividad</h3><p>Un sistema puede contener subsistemas y, a su vez, formar parte de un suprasistema. La lógica de organización se repite en diferentes niveles.</p><span class="tag">Niveles</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 04</span><h3>Equifinalidad</h3><p>En sistemas abiertos, condiciones iniciales distintas y caminos diferentes pueden conducir a un mismo estado final o resultado.</p><span class="tag">Múltiples caminos</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 05</span><h3>Entropía y neguentropía</h3><p>La entropía representa tendencias al desorden o pérdida de organización. La incorporación de energía, información y mecanismos de regulación puede contrarrestar esa tendencia.</p><span class="tag">Cambio y organización</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 06</span><h3>Entradas, procesos y salidas</h3><p>Las entradas son recursos o información que recibe el sistema; los procesos los transforman y las salidas son los resultados generados.</p><span class="tag">Transformación</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 07</span><h3>Retroalimentación</h3><p>Información sobre los resultados que retorna al sistema y permite corregir, mantener o modificar su funcionamiento.</p><span class="tag">Regulación</span></article>
+   <article class="concept reveal"><span class="num">CONCEPTO 08</span><h3>Frontera y entorno</h3><p>La frontera delimita qué se considera parte del sistema. El entorno reúne factores externos que lo afectan o con los que intercambia recursos e información.</p><span class="tag">Contexto</span></article>
+  </div>
+  <div class="resource-inline reveal"><h3>🎥 Para profundizar: conceptos básicos de la TGS</h3><p>Repasa subsistemas, suprasistemas, límites, retroalimentación, homeostasis y entropía.</p><a href="https://www.youtube.com/watch?v=rcAAGRp1eHk" target="_blank" rel="noopener">Ver análisis de conceptos básicos ↗</a><span class="small muted">Relacionado con: totalidad, recursividad, entropía, retroalimentación y frontera.</span></div>
+ </div>
+</section>
+
+<section class="section" id="clasificacion" style="background:#f4effa">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">03 · Tipos de sistemas</div><h2>Clasificación de los sistemas</h2><p>Un mismo sistema puede pertenecer a varias categorías, porque cada clasificación observa una característica diferente: su origen, su constitución o su relación con el entorno.</p></div>
+  <div class="concept-grid">
+   <article class="concept reveal"><span class="num">CRITERIO 01</span><h3>Según su origen</h3><p><strong>Naturales:</strong> surgen sin haber sido diseñados por las personas, como un ecosistema o el sistema solar.</p><p><strong>Artificiales:</strong> son creados o modificados por las personas para cumplir propósitos, como una universidad o un sistema informático.</p><span class="tag">Natural / Artificial</span></article>
+   <article class="concept reveal"><span class="num">CRITERIO 02</span><h3>Según su constitución</h3><p><strong>Físicos o concretos:</strong> están formados por componentes materiales y observables, como una computadora.</p><p><strong>Abstractos:</strong> se componen de ideas, conceptos, símbolos o reglas, como un modelo matemático.</p><span class="tag">Concreto / Abstracto</span></article>
+   <article class="concept reveal"><span class="num">CRITERIO 03</span><h3>Según el intercambio con el entorno</h3><p><strong>Abiertos:</strong> intercambian materia, energía o información con el entorno, como una organización.</p><p><strong>Cerrados:</strong> en los modelos teóricos presentan un intercambio muy limitado de materia con el entorno, aunque pueden intercambiar energía.</p><p><strong>Aislados:</strong> idealmente no intercambian ni materia ni energía con el entorno. Son una abstracción útil para ciertos modelos.</p><span class="tag">Abierto / Cerrado / Aislado</span></article>
+   <article class="concept reveal"><span class="num">CRITERIO 04</span><h3>Según su comportamiento</h3><p><strong>Deterministas:</strong> su comportamiento puede predecirse cuando se conocen sus condiciones y reglas.</p><p><strong>Probabilísticos:</strong> sus resultados se describen mediante probabilidades porque existe incertidumbre.</p><span class="tag">Determinista / Probabilístico</span></article>
+   <article class="concept reveal"><span class="num">CRITERIO 05</span><h3>Según su cambio en el tiempo</h3><p><strong>Estáticos:</strong> se estudian en un estado o momento determinado.</p><p><strong>Dinámicos:</strong> cambian y evolucionan con el tiempo, como el tráfico de una ciudad.</p><span class="tag">Estático / Dinámico</span></article>
+   <article class="concept reveal"><span class="num">CRITERIO 06</span><h3>Según su complejidad</h3><p><strong>Simples:</strong> tienen pocos componentes y relaciones relativamente fáciles de identificar.</p><p><strong>Complejos:</strong> reúnen numerosos componentes interdependientes y relaciones que pueden cambiar.</p><span class="tag">Simple / Complejo</span></article>
+   <article class="concept reveal"><span class="num">CRITERIO 07</span><h3>Según su capacidad de adaptación</h3><p><strong>Adaptativos:</strong> modifican su comportamiento o estructura ante cambios del entorno.</p><p><strong>No adaptativos:</strong> no ajustan su funcionamiento de manera autónoma frente a esos cambios.</p><span class="tag">Adaptativo / No adaptativo</span></article>
+   <article class="concept reveal"><span class="num">EJEMPLO INTEGRADOR</span><h3>Una cafetería universitaria</h3><p>Es artificial por su origen, concreta por sus componentes, abierta porque intercambia recursos e información, y dinámica porque sus pedidos e inventario cambian continuamente.</p><span class="tag">Varias clasificaciones a la vez</span></article>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="caso">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">03 · Aplicación</div><h2>Un caso: plataforma de pedidos de una cafetería</h2><p>Imagina una cafetería universitaria que implementa un sistema digital para registrar pedidos, administrar inventario y entregar productos.</p></div>
+  <div class="case-layout reveal">
+   <div class="case-visual">
+    <div><div class="eyebrow" style="color:var(--lime)">Modelo simplificado</div><h3 style="font-size:1.7rem;margin-top:12px">Del pedido a la entrega</h3><p style="color:#c6d5ce">El resultado depende de la coordinación entre personas, datos, procesos y recursos físicos.</p></div>
+    <div class="flow"><span>Entrada<br>Pedido</span><i>→</i><span>Proceso<br>Validación</span><i>→</i><span>Salida<br>Entrega</span></div>
+    <p class="small" style="color:#9bb0a6">La retroalimentación del inventario y de los usuarios permite ajustar el servicio.</p>
+   </div>
+   <div class="case-list">
+    <div class="case-item"><b>Totalidad</b>La experiencia depende del conjunto: aplicación, personal, inventario, pagos y atención.</div>
+    <div class="case-item"><b>Sinergia</b>La coordinación entre caja y cocina reduce confusiones y mejora el servicio.</div>
+    <div class="case-item"><b>Recursividad</b>La cafetería contiene áreas; cada área puede tener procesos y subprocesos.</div>
+    <div class="case-item"><b>Equifinalidad</b>El pedido puede registrarse en mostrador o desde un formulario y llegar al mismo resultado.</div>
+    <div class="case-item"><b>Entropía</b>Datos duplicados o inventario desactualizado generan desorganización operativa.</div>
+    <div class="case-item"><b>Retroalimentación</b>Las alertas de existencias y las opiniones permiten corregir el proceso.</div>
+   </div>
+  </div>
+  <div class="resource-inline reveal"><h3>🎥 Para conectar la teoría con la práctica</h3><p>Observa cómo se aplican entradas, procesos, salidas y retroalimentación en el análisis de sistemas.</p><a href="https://www.youtube.com/watch?v=BGYqnkZb7Rk" target="_blank" rel="noopener">Ver explicación aplicada de la TGS ↗</a><span class="small muted">Relacionado con: caso de estudio, sistemas abiertos y procesos organizacionales.</span></div>
+ </div>
+</section>
+<section class="section exercise" id="practica">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">04 · Comprueba tu comprensión</div><h2>Ejercicios formativos</h2><p>Selecciona una respuesta. Recibirás una explicación inmediata para reforzar el concepto.</p></div>
+  <div class="exercise-grid">
+   <article class="question reveal" data-answer="b" data-explain="Correcto: la retroalimentación devuelve información sobre los resultados y ayuda a regular el funcionamiento."><h3>1. El sistema revisa las opiniones de los usuarios y modifica el servicio. ¿Qué concepto se evidencia?</h3><div class="options"><button class="option" data-value="a">Entropía</button><button class="option" data-value="b">Retroalimentación</button><button class="option" data-value="c">Frontera</button></div><div class="feedback" aria-live="polite"></div></article>
+   <article class="question reveal" data-answer="c" data-explain="Exacto: la equifinalidad admite diferentes trayectorias para alcanzar un resultado equivalente."><h3>2. Dos equipos usan procedimientos distintos y logran entregar el mismo producto. ¿Qué principio representa?</h3><div class="options"><button class="option" data-value="a">Recursividad</button><button class="option" data-value="b">Entropía</button><button class="option" data-value="c">Equifinalidad</button></div><div class="feedback" aria-live="polite"></div></article>
+   <article class="question reveal" data-answer="a" data-explain="Bien: la recursividad permite reconocer sistemas, subsistemas y suprasistemas en distintos niveles."><h3>3. Una facultad está formada por programas y cada programa por grupos académicos. ¿Qué concepto aparece?</h3><div class="options"><button class="option" data-value="a">Recursividad</button><button class="option" data-value="b">Sinergia</button><button class="option" data-value="c">Equifinalidad</button></div><div class="feedback" aria-live="polite"></div></article>
+   <article class="question reveal" data-answer="b" data-explain="Correcto: la sinergia describe el valor o resultado que surge de la interacción coordinada de las partes."><h3>4. La integración de cocina, caja e inventario mejora el servicio más que su operación aislada. ¿Qué se observa?</h3><div class="options"><button class="option" data-value="a">Frontera</button><button class="option" data-value="b">Sinergia</button><button class="option" data-value="c">Entropía</button></div><div class="feedback" aria-live="polite"></div></article>
+  </div>
+  <div class="activity-xp" id="exerciseXp">Responde las cuatro preguntas para registrar tu experiencia.</div><div class="exercise-retry-wrap"><button class="btn light" id="retryExercises" type="button">↻ Reintentar preguntas</button></div>
+ </div>
+</section>
+<section class="section" id="juegos">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">05 · Aprende jugando</div><h2>Cuatro retos para fijar ideas</h2><p>Combina asociación, memoria, análisis de situaciones y organización de procesos. Los cuatro retos funcionan en el navegador.</p></div>
+  <div class="game-xp-note">Cada reto aporta hasta 100–150 XP. La experiencia se calcula según tus aciertos y conserva tu mejor resultado.</div><div class="game-grid">
+   <article class="game reveal">
+    <h3>Reto 1 · Asociación de conceptos</h3><p class="muted small">Selecciona un concepto y luego su definición. Completa las cuatro parejas.</p>
+    <div class="match-list" id="matchTerms"></div><div class="match-list" id="matchDefs" style="margin-top:10px"></div>
+    <div class="match-status" id="matchStatus" aria-live="polite">0 de 4 parejas correctas.</div><div class="activity-xp" id="matchXp">Mejor resultado: pendiente</div><button class="btn light" id="resetMatch" style="margin-top:14px">Reiniciar reto</button>
+   </article>
+   <article class="game reveal">
+    <h3>Reto 2 · Memorama sistémico</h3><p class="muted small">Encuentra las parejas de concepto y pista. Toca dos cartas por turno.</p>
+    <div class="memory-board" id="memoryBoard"></div><div class="match-status" id="memoryStatus" aria-live="polite">Parejas encontradas: 0 de 4.</div><div class="activity-xp" id="memoryXp">Mejor resultado: pendiente</div><button class="btn light" id="resetMemory" style="margin-top:14px">Mezclar de nuevo</button>
+   </article>
+   <article class="game reveal">
+    <h3>Reto 3 · Detective sistémico</h3>
+    <p class="muted small">Lee cada situación y elige el concepto que mejor explica lo que sucede.</p>
+    <div class="detective-box" id="detectiveBox">
+     <div class="tag" id="detectiveStep">CASO 1 DE 3</div>
+     <p id="detectiveScenario" style="font-weight:700;margin-top:14px"></p>
+     <div class="options" id="detectiveOptions"></div>
+     <div class="feedback" id="detectiveFeedback" aria-live="polite"></div>
+     <div class="game-actions"><button class="btn light" id="detectiveNext" disabled>Siguiente caso →</button></div>
+    </div>
+    <div class="match-status" id="detectiveStatus" aria-live="polite">Casos resueltos: 0 de 3.</div><div class="activity-xp" id="detectiveXp">Mejor resultado: pendiente</div>
+    <button class="btn light" id="resetDetective" style="margin-top:12px">Reiniciar detective</button>
+   </article>
+   <article class="game reveal">
+    <h3>Reto 4 · Construye el flujo</h3>
+    <p class="muted small">Selecciona las etapas en el orden correcto para representar el funcionamiento básico de un sistema.</p>
+    <div class="sequence-bank" id="sequenceBank"></div>
+    <div class="sequence-result"><strong>Tu secuencia:</strong><ol id="sequenceChosen"><li class="muted">Aún no has seleccionado etapas.</li></ol></div>
+    <div class="game-actions"><button class="btn dark" id="checkSequence">Comprobar orden</button><button class="btn light" id="resetSequence">Reiniciar</button></div>
+    <div class="feedback" id="sequenceFeedback" aria-live="polite"></div><div class="activity-xp" id="sequenceXp">Mejor resultado: pendiente</div>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="videos" style="background:#f4effa">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">07 · Biblioteca audiovisual</div><h2>Videos y recursos para profundizar</h2><p>En este apartado se reúnen todos los videos enlazados a lo largo del OVA. Cada recurso indica qué parte del temario complementa. Los enlaces abren el material en su plataforma original.</p></div>
+  <div class="video-grid">
+   <article class="video-card reveal"><a class="video-poster" href="https://www.youtube.com/watch?v=-j3Y2mZH4rk" target="_blank" rel="noopener"><span class="play-icon">▶</span><span>VER RECURSO</span></a><div class="video-info"><h3>Introducción a la Teoría General de Sistemas</h3><p class="muted small">Explicación breve de la definición de sistema, premisas de la TGS y aplicaciones.</p><p><strong>Temario:</strong> contexto, concepto de sistema y fundamentos.</p><a href="https://www.youtube.com/watch?v=-j3Y2mZH4rk" target="_blank" rel="noopener">Abrir en YouTube ↗</a></div></article>
+   <article class="video-card reveal"><a class="video-poster video-poster-alt" href="https://www.youtube.com/watch?v=JuI2QQQ3aB8" target="_blank" rel="noopener"><span class="play-icon">▶</span><span>VER RECURSO</span></a><div class="video-info"><h3>Introducción a la TGS | Universidad Central de Venezuela</h3><p class="muted small">Recorrido por el concepto de sistema, elementos, enfoque de entrada/salida, sinergia, recursividad y entropía.</p><p><strong>Temario:</strong> elementos, conceptos fundamentales y procesos.</p><a href="https://www.youtube.com/watch?v=JuI2QQQ3aB8" target="_blank" rel="noopener">Abrir en YouTube ↗</a></div></article>
+   <article class="video-card reveal"><a class="video-poster" href="https://www.youtube.com/watch?v=rcAAGRp1eHk" target="_blank" rel="noopener"><span class="play-icon">▶</span><span>VER RECURSO</span></a><div class="video-info"><h3>Análisis de sistemas: conceptos básicos de la TGS</h3><p class="muted small">Explica subsistemas, suprasistemas, límites, retroalimentación, homeostasis y entropía.</p><p><strong>Temario:</strong> totalidad, recursividad, frontera y propiedades.</p><a href="https://www.youtube.com/watch?v=rcAAGRp1eHk" target="_blank" rel="noopener">Abrir en YouTube ↗</a></div></article>
+   <article class="video-card reveal"><a class="video-poster video-poster-alt" href="https://www.youtube.com/watch?v=BGYqnkZb7Rk" target="_blank" rel="noopener"><span class="play-icon">▶</span><span>VER RECURSO</span></a><div class="video-info"><h3>Teoría General de Sistemas: explicación y ejemplos</h3><p class="muted small">Clase con ejemplos de sistemas abiertos y cerrados, entropía, equifinalidad, subsistemas y retroalimentación.</p><p><strong>Temario:</strong> conceptos TGS, clasificación, entradas, procesos y salidas.</p><a href="https://www.youtube.com/watch?v=BGYqnkZb7Rk" target="_blank" rel="noopener">Abrir en YouTube ↗</a></div></article>
+   <article class="video-card reveal"><a class="video-poster" href="https://www.youtube.com/watch?v=XTRAgz-CTrs" target="_blank" rel="noopener"><span class="play-icon">▶</span><span>VER RECURSO</span></a><div class="video-info"><h3>Pensamiento sistémico</h3><p class="muted small">Recurso complementario para comprender las relaciones entre componentes y el enfoque sistémico.</p><p><strong>Temario:</strong> pensamiento sistémico y análisis de organizaciones.</p><a href="https://www.youtube.com/watch?v=XTRAgz-CTrs" target="_blank" rel="noopener">Abrir en YouTube ↗</a></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="evaluacion">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">08 · Evaluación de aprendizaje</div><h2>Quiz: piensa en términos de sistemas</h2><p>Responde cinco preguntas seleccionadas aleatoriamente. El resultado se calcula al finalizar y podrás revisar las explicaciones.</p></div>
+  <div class="quiz-shell reveal">
+   <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div class="eyebrow" style="color:var(--lime)">Evaluación final</div><h3 id="quizCounter" style="font-size:1.4rem;margin-top:8px">Pregunta 1 de 5</h3></div><div class="small" id="quizScoreLive">Respuestas: 0/5</div></div>
+   <div class="progress"><span id="quizProgress"></span></div>
+   <div id="quizArea"><h3 id="quizQuestion"></h3><div id="quizOptions"></div></div>
+   <div class="quiz-controls"><button class="btn" id="nextQuiz">Siguiente →</button></div>
+   <div id="quizResult" class="result" hidden aria-live="polite"></div><div class="activity-xp" id="quizXp">Mejor resultado: pendiente</div>
+  </div>
+ </div>
+</section>
+<section class="section" id="creditos" style="background:#edf2ec">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">09 · Cierre</div><h2>Créditos y referencias</h2><p>Este recurso reúne explicaciones, actividades y situaciones de aplicación para apoyar el aprendizaje autónomo de los fundamentos de la TGS.</p></div>
+  <div class="credits-grid">
+   <article class="panel reveal"><h3>Autoría</h3><p><strong>Jose Emanuel Hernandez García</strong></p><p class="muted">Asignatura: Teoría General de Sistemas<br>Universidad Simón Bolívar · Sede Cúcuta</p><hr style="border:0;border-top:1px solid var(--line);margin:22px 0"><h3>Propósito de aprendizaje</h3><p>Reconocer los conceptos fundamentales de la Teoría General de Sistemas y aplicarlos al análisis de situaciones organizacionales y tecnológicas.</p></article>
+   <article class="panel references reveal"><h3>Referencias bibliográficas · APA 7</h3>
+    <ol>
+     <li>Bertalanffy, L. von. (1968). <em>General system theory: Foundations, development, applications.</em> George Braziller.</li>
+     <li>Johansen Bertoglio, O. (2004). <em>Introducción a la teoría general de sistemas.</em> Limusa.</li>
+     <li>Boulding, K. E. (1956). General systems theory—The skeleton of science. <em>Management Science, 2</em>(3), 197–208. <a href="https://doi.org/10.1287/mnsc.2.3.197" target="_blank" rel="noopener">https://doi.org/10.1287/mnsc.2.3.197</a></li>
+     <li>Arnold, M., & Osorio, F. (1998). Introducción a los conceptos básicos de la teoría general de sistemas. <em>Cinta de Moebio, (3).</em> <a href="https://www.moebio.uchile.cl/03/frprinci.html" target="_blank" rel="noopener">Texto en línea</a>.</li>
+    </ol>
+   </article>
+  </div>
+  <div class="disclosure reveal" style="margin-top:20px"><h3>Declaración de uso de herramientas de inteligencia artificial</h3><p>Se utilizaron herramientas de inteligencia artificial como apoyo para organizar ideas, proponer una estructura didáctica y asistir en la elaboración y revisión del código. La selección del enfoque, la verificación de contenidos, la adaptación académica y la responsabilidad final sobre el recurso corresponden a su autor. Las herramientas de IA no sustituyen la consulta de las fuentes bibliográficas citadas.</p></div>
+  <p class="small muted" style="margin-top:20px">Nota académica: contrasta este material con las orientaciones del docente y las lecturas asignadas en la asignatura. Los ejemplos de la cafetería son un caso didáctico ilustrativo.</p>
+ </div>
+</section>
+<div class="page-controls" id="pageControls"><button type="button" id="pagePrev">← Anterior</button><span id="pageIndicator">Página 1</span><button type="button" id="pageNext">Siguiente →</button></div></main>
+<footer class="footer"><div class="wrap footer-row"><div><strong>CONEXIONES · OVA TGS</strong><div class="small">Universidad Simón Bolívar · Ingeniería de Sistemas</div></div><div class="small">Diseñado para aprender pensando en relaciones. <a href="#inicio">Volver al inicio ↑</a></div></div></footer>
+<button class="backtop" id="backtop" aria-label="Volver arriba">↑</button>
+<script src="script.js" defer></script>
+</body>
+</html>

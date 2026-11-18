@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OVA de Teoría General de Sistemas sobre el caos determinista y el mapa logístico.">
+<title>Teoría · Laboratorio del Caos</title>
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<script defer src="../js/main.js"></script>
+</head>
+<body id="arriba">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <div class="identity">
+      <img class="header-logo" src="../assets/imagenes/logo-unisimon.png" alt="Universidad Simón Bolívar" width="62" height="40">
+      <a class="brand" href="index.html">Laboratorio<span> del Caos</span></a>
+    </div>
+    <button type="button" id="menu" class="menu" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav id="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="teoria.html" aria-current="page">Teoría</a><a href="simulador.html">Simulador</a><a href="juegos.html">Juegos</a><a href="quiz.html">Evaluación</a><a href="creditos.html">Créditos</a></nav>
+  </div>
+</header>
+<main id="contenido">
+  <section id="teoria" class="shell section page-section">
+    <p class="label">Teoría</p>
+    <h1>De la regla a la trayectoria</h1>
+    <div class="theory-grid">
+      <div>
+        <h3>Sistemas dinámicos y determinismo</h3>
+        <p>El estado de un sistema dinámico cambia con el tiempo. En un modelo discreto se observa a intervalos, como una generación tras otra. En un modelo determinista, el estado actual y la regla fijan el siguiente estado <a class="citation" href="creditos.html#herrera-2001">(Herrera Díaz &amp; Conde, 2001)</a>.</p>
+        <h3>Sensibilidad a las condiciones iniciales</h3>
+        <p>En un régimen caótico, dos estados iniciales muy cercanos pueden generar trayectorias que se separan con el tiempo. Así, una pequeña imprecisión al medir el estado inicial puede limitar la predicción <a class="citation" href="creditos.html#campos-2002">(Campos, 2002)</a>. Una trayectoria irregular puede surgir de la dinámica interna del sistema <a class="citation" href="creditos.html#lombardi-2001">(Lombardi, 2001)</a>.</p>
+        <h3>Relación con la TGS</h3>
+        <p>El mapa logístico permite estudiar cómo cambia un sistema con cada iteración. En sistemas abiertos, como las organizaciones, también interesa cómo influyen las interacciones internas y el entorno <a class="citation" href="creditos.html#rodriguez-2002">(Rodríguez Devis, 2002)</a>. Para identificar caos en un caso concreto hay que examinar su dinámica.</p>
+      </div>
+      <aside class="notebook">
+        <h3>El mapa logístico</h3>
+        <p class="formula" aria-label="x sub n más uno es igual a r por x sub n por uno menos x sub n">x<sub>n+1</sub> = r · x<sub>n</sub> · (1 − x<sub>n</sub>)</p>
+        <p><strong>x<sub>n</sub></strong> representa un estado normalizado entre 0 y 1. <strong>r</strong> es el parámetro que modifica la dinámica. Al iterar, la salida de un paso se convierte en la entrada del siguiente <a class="citation" href="creditos.html#campos-1996">(Campos Romero, 1996)</a>.</p>
+        <p>Si r = 3 y x<sub>0</sub> = 0,2, el primer paso da 3 × 0,2 × 0,8 = <strong>0,48</strong>.</p>
+      </aside>
+    </div>
+    <div class="case" id="casos">
+      <article>
+        <h2>Mezcla de fluidos</h2>
+        <p>En ingeniería química, un flujo puede estirar y plegar una porción de fluido repetidamente. El desplazamiento de partículas inicialmente cercanas ayuda a explicar cómo se distribuye una sustancia durante la mezcla <a class="citation" href="creditos.html#herrera-2001">(Herrera Díaz &amp; Conde, 2001)</a>.</p>
+        <p><strong>Observa:</strong> ¿qué tendrías que medir para comparar las trayectorias de dos partículas? Sus posiciones iniciales y la distancia entre ellas a lo largo del tiempo.</p>
+      </article>
+      <article>
+        <h2>Circuito de Chua</h2>
+        <p>El circuito de Chua es un sistema electrónico físico que puede presentar oscilaciones caóticas. Los voltajes y la corriente describen su estado. Al observar las mediciones sucesivas, se puede estudiar cómo cambia el circuito en el tiempo <a class="citation" href="creditos.html#campos-2002">(Campos, 2002)</a>.</p>
+        <p><strong>Compara:</strong> una señal periódica repite su patrón tras un intervalo. En un régimen caótico, esa repetición regular se pierde.</p>
+      </article>
+    </div>
+
+    <section id="videos" class="video-section" aria-labelledby="videos-title">
+      <h2 id="videos-title">Videos del laboratorio</h2>
+      <div class="video-grid">
+        <article>
+          <h3 id="clip-sensibilidad-title">Dos estados iniciales</h3>
+          <video controls playsinline preload="metadata" class="video" poster="../assets/videos/condiciones-iniciales.png" aria-labelledby="clip-sensibilidad-title">
+            <source src="../assets/videos/condiciones-iniciales.mp4" type="video/mp4">
+            </video>
+          <p class="video-fallback"><a href="../assets/videos/condiciones-iniciales.mp4">Abrir MP4 directamente</a></p>
+          <details><summary>Leer explicación del video</summary><p>Con r = 3,9, comparamos x₀ = 0,25 y x₀ = 0,2501. La diferencia inicial es de 0,0001. Las trayectorias se ven cercanas durante varios pasos y luego se separan. La regla es la misma en ambas series.</p></details>
+        </article>
+        <article>
+          <h3 id="clip-parametro-title">Tres valores de r</h3>
+          <video controls playsinline preload="metadata" class="video" poster="../assets/videos/tres-regimenes.png" aria-labelledby="clip-parametro-title">
+            <source src="../assets/videos/tres-regimenes.mp4" type="video/mp4">
+            </video>
+          <p class="video-fallback"><a href="../assets/videos/tres-regimenes.mp4">Abrir MP4 directamente</a></p>
+          <details><summary>Leer explicación del video</summary><p>Con x₀ = 0,25 y r = 2,8, la trayectoria se acerca a un punto fijo. Para r = 3,2 alterna entre dos valores. En el ejemplo con r = 3,9, se observa una trayectoria caótica. Las tres series se calculan con la misma fórmula.</p></details>
+        </article>
+      </div>
+      <p class="video-note">Animaciones sin narración, calculadas con el mapa logístico <a href="creditos.html#campos-1996">(Campos Romero, 1996)</a>.</p>
+      <p><a href="creditos.html#video-narrado">Ver la explicación narrada en español</a>.</p>
+    </section>
+  </section>
+<div class="shell next-page"><a class="button" href="simulador.html">Continuar a Simulador <span aria-hidden="true">→</span></a></div>
+</main>
+<footer class="shell footer"><a href="creditos.html">Créditos del OVA</a><a href="#arriba">Volver arriba ↑</a></footer>
+<noscript>Activa JavaScript para usar las actividades interactivas.</noscript>
+</body>
+</html>

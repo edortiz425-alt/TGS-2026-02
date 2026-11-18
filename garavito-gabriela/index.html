@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVA · Propiedades de los sistemas</title>
+<style>
+/* ===== Colores: cámbialos aquí ===== */
+:root{--a:#5f3dc4;--b:#1c7ed6;--c:#f08c00;--d:#0ca678;--bg:#f4f2fb;--tx:#222;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55}
+.wrap{max-width:860px;margin:auto;padding:0 16px}
+/* Portada */
+.hero{background:linear-gradient(135deg,var(--a),var(--b));color:#fff;text-align:center;padding:36px 16px 24px}
+.hero h1{margin:0;font-size:2rem}
+.hero p{margin:6px 0 0;opacity:.9}
+.autor{font-size:.85rem;margin-top:10px;opacity:.85}
+.diagrama{max-width:620px;width:100%;margin:18px auto 0;display:block}
+.flujo{stroke-dasharray:7 6;animation:mover 1.2s linear infinite}
+@keyframes mover{to{stroke-dashoffset:-26}}
+/* Barra de progreso */
+#barra{position:sticky;top:0;height:6px;background:#ddd;z-index:5}
+#barra div{height:100%;width:0;background:var(--c);transition:width .4s}
+/* Secciones */
+section{background:var(--card);border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+h2{margin:0 0 6px;color:var(--a)}
+.sub{color:#666;margin:0 0 14px}
+/* Tarjetas */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.carta{border-radius:14px;padding:14px;min-height:190px;color:#fff;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;transition:transform .2s}
+.carta:hover{transform:translateY(-4px)}
+.carta .em{font-size:2.4rem}
+.carta h3{margin:4px 0}
+.carta .back{font-size:.88rem;text-align:left}
+.carta small{display:block;margin-top:6px;font-style:italic}
+.hint{font-size:.8rem;opacity:.85}
+/* Simuladores */
+.sim{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.box{border:2px dashed var(--a);border-radius:14px;padding:14px;text-align:center}
+.box h3{margin:0 0 6px}
+button{background:var(--a);color:#fff;border:0;border-radius:10px;padding:9px 14px;margin:4px;cursor:pointer;font-size:.92rem}
+button:hover{filter:brightness(1.15)}
+.puntos{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;max-width:260px;margin:10px auto}
+.punto{height:22px;border-radius:50%;transition:transform .7s}
+.term{font-size:2.6rem;font-weight:700;margin:6px 0}
+#estado{font-weight:600;min-height:24px}
+/* Quiz */
+.op{display:block;width:100%;text-align:left;background:#efeafd;color:var(--tx);margin:6px 0}
+.op.ok{background:#c3fae8}.op.mal{background:#ffd8d8}
+#fb{min-height:24px;font-weight:600}
+input[type=text]{padding:8px;border-radius:8px;border:1px solid #bbb;font-size:1rem;width:100%;max-width:300px}
+.hero{position:relative;overflow:hidden}
+.bub{position:absolute;bottom:-30px;font-size:1.8rem;opacity:.35;animation:sube 9s linear infinite}
+@keyframes sube{to{transform:translateY(-340px) rotate(40deg)}}
+#pts{position:fixed;top:12px;right:10px;background:var(--c);color:#fff;padding:6px 12px;border-radius:20px;font-weight:700;z-index:6;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.cm{height:64px;font-size:.8rem;margin:0;padding:4px;background:var(--b)}
+.cm.up{background:var(--c)}.cm.ok{background:var(--d)}
+input.campo,select.campo{display:block;width:100%;max-width:100%;margin:6px 0;padding:8px;border-radius:8px;border:1px solid #bbb;font-size:1rem}
+.fila{border-bottom:1px solid #eee;padding:6px 0}
+.tarj{color:#fff;border-radius:14px;padding:16px;margin-top:12px}
+.conf{position:fixed;top:-30px;font-size:1.6rem;z-index:20;animation:cae 3s linear forwards}
+@keyframes cae{to{transform:translateY(105vh) rotate(360deg)}}
+footer{text-align:center;color:#777;font-size:.8rem;padding:10px 0 30px}
+</style>
+</head>
+<body>
+
+<div id="barra"><div id="prog"></div></div>
+<div id="pts">⭐ 0 puntos</div>
+
+<header class="hero">
+  <span class="bub" style="left:5%">⚙️</span><span class="bub" style="left:22%;animation-delay:2s">🧠</span><span class="bub" style="left:45%;animation-delay:4s">🔁</span><span class="bub" style="left:68%;animation-delay:1s">🌐</span><span class="bub" style="left:88%;animation-delay:3s">🧩</span>
+  <h1>🧩 Propiedades de los sistemas</h1>
+  <p>Objeto Virtual de Aprendizaje · Introducción a la Teoría General de Sistemas</p>
+  <svg class="diagrama" viewBox="0 0 620 170" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#fff" fill-opacity=".18" stroke="#fff" stroke-width="2">
+      <rect x="10" y="40" width="150" height="70" rx="14"/>
+      <rect x="235" y="40" width="150" height="70" rx="14"/>
+      <rect x="460" y="40" width="150" height="70" rx="14"/>
+    </g>
+    <g fill="#fff" font-size="17" text-anchor="middle" font-family="Segoe UI,Arial">
+      <text x="85" y="82">📥 Entradas</text>
+      <text x="310" y="82">⚙️ Proceso</text>
+      <text x="535" y="82">📤 Salidas</text>
+      <text x="310" y="160" font-size="14">🔁 Retroalimentación</text>
+    </g>
+    <g stroke="#fff" stroke-width="3" fill="none" class="flujo">
+      <path d="M160 75 H235"/><path d="M385 75 H460"/>
+      <path d="M535 110 V135 H85 V110"/>
+    </g>
+  </svg>
+  <div class="autor">Elaborado por: Gabriela Garavito Roa</div>
+</header>
+
+<div class="wrap">
+
+<section id="s1">
+  <h2>1. ¿Qué es un sistema?</h2>
+  <p>Un <b>sistema</b> es un conjunto de elementos que se relacionan entre sí y trabajan juntos para cumplir un objetivo. Lo vemos en el cuerpo humano, en una empresa, en un computador o en una ciudad como Cúcuta.</p>
+  <p><b>Objetivo del OVA:</b> reconocer las propiedades de los sistemas y aplicarlas a ejemplos reales. ¡Gana ⭐ puntos en cada actividad!</p>
+</section>
+
+<section id="s2">
+  <h2>2. Las 8 propiedades</h2>
+  <p class="sub">👆 Toca cada tarjeta para ver su definición y un ejemplo. Vuelve a tocarla para regresar.</p>
+  <div class="grid" id="cartas"></div>
+</section>
+
+<section id="s3">
+  <h2>3. Laboratorio interactivo</h2>
+  <p class="sub">Experimenta con dos propiedades.</p>
+  <div class="sim">
+    <div class="box">
+      <h3>⏳ Entropía</h3>
+      <div class="puntos" id="puntos"></div>
+      <div id="txtEnt">Sistema ordenado</div>
+      <button onclick="tiempo()">Pasar el tiempo</button>
+      <button onclick="mant()">🔧 Dar mantenimiento</button>
+    </div>
+    <div class="box">
+      <h3>🌡️ Homeostasis y retroalimentación</h3>
+      <div class="term" id="temp">30 °C</div>
+      <div id="estado"></div>
+      <div>Temperatura deseada: <b id="meta">22</b> °C</div>
+      <input type="range" id="rango" min="18" max="28" value="22" oninput="cambiarMeta()">
+      <br><button onclick="ventana()">🪟 Abrir ventana (perturbación)</button>
+    </div>
+  </div>
+</section>
+
+<section id="sa">
+  <h2>4. Relaciona 🔗</h2>
+  <p class="sub">Elige la propiedad que mejor describe cada situación (+10 puntos por acierto).</p>
+  <div id="rel"></div>
+  <button onclick="revRel()">Revisar respuestas</button> <b id="rRel"></b>
+</section>
+
+<section id="sb">
+  <h2>5. Memoria de propiedades 🃏</h2>
+  <p class="sub">Encuentra las parejas: el emoji y el nombre de la propiedad (+15 puntos al terminar).</p>
+  <div class="mem" id="mem"></div>
+  <div id="memTxt">Movimientos: 0</div>
+  <button onclick="nuevaMem()">🔄 Reiniciar</button>
+</section>
+
+<section id="sc">
+  <h2>6. ¿Verdadero o falso? ✔️❌</h2>
+  <p class="sub">+5 puntos por cada acierto.</p>
+  <div id="vf"></div>
+</section>
+
+<section id="sd">
+  <h2>7. Diseña tu propio sistema 🛠️</h2>
+  <p class="sub">Piensa en un sistema real (tu universidad, una tienda, tu celular…) y complétalo (+20 puntos).</p>
+  <input class="campo" type="text" id="sNom" placeholder="Nombre del sistema (ej: Mi universidad)">
+  <input class="campo" type="text" id="sEn" placeholder="📥 Entradas (ej: estudiantes, docentes)">
+  <input class="campo" type="text" id="sPr" placeholder="⚙️ Proceso (ej: clases y evaluaciones)">
+  <input class="campo" type="text" id="sSa" placeholder="📤 Salidas (ej: profesionales graduados)">
+  <select class="campo" id="sProp"></select>
+  <button onclick="crearSis()">✨ Crear mi tarjeta</button>
+  <div id="miSis"></div>
+</section>
+
+<section id="s4">
+  <h2>8. Evaluación final 🏁</h2>
+  <p>Escribe tu nombre: <input type="text" id="nombre" placeholder="Tu nombre"></p>
+  <button id="bIni" onclick="iniciar()">Comenzar quiz</button>
+  <div id="quiz"></div>
+</section>
+
+<section id="s5">
+  <h2>9. Conclusiones</h2>
+  <ul>
+    <li>El sistema es más que la suma de sus partes (<b>sinergia</b>).</li>
+    <li>Se regula con <b>retroalimentación</b> y busca la <b>homeostasis</b>.</li>
+    <li>Sin energía ni mantenimiento aumenta la <b>entropía</b>.</li>
+    <li>Estas propiedades sirven para analizar empresas, software y procesos.</li>
+  </ul>
+  <p><b>Referencia:</b> Von Bertalanffy, L. (1968). <i>Teoría general de los sistemas</i>. Fondo de Cultura Económica.</p>
+</section>
+
+</div>
+<footer>OVA · Propiedades de los sistemas · Hecho con HTML, CSS y JavaScript</footer>
+
+<script>
+/* ===== DATOS (edita aquí los textos) ===== */
+var props = [
+  ["🌐","Totalidad","El sistema se ve como un todo: si cambia una parte, cambian las demás.","Si falla la tarjeta madre, todo el computador deja de funcionar.","#5f3dc4"],
+  ["🤝","Sinergia","El conjunto logra más que la suma de las partes por separado.","Un equipo de fútbol rinde más unido que cada jugador solo.","#1c7ed6"],
+  ["⏳","Entropía","Tendencia natural al desorden y al desgaste sin energía ni mantenimiento.","Un PC sin mantenimiento se llena de archivos basura y se pone lento.","#e8590c"],
+  ["⚖️","Homeostasis","Capacidad de mantener el equilibrio interno ante los cambios del entorno.","El cuerpo mantiene su temperatura cerca de 37 °C.","#0ca678"],
+  ["🔁","Retroalimentación","La salida vuelve como información de entrada para corregir el sistema.","Un termostato enciende o apaga el aire según la temperatura medida.","#d6336c"],
+  ["🛤️","Equifinalidad","Se puede llegar al mismo objetivo por caminos diferentes.","Dos estudiantes estudian distinto y ambos aprueban el curso.","#7048e8"],
+  ["🪜","Jerarquía","Los sistemas se organizan en niveles: subsistemas dentro de sistemas mayores.","Universidad → facultades → programas → grupos.","#f08c00"],
+  ["🦎","Adaptabilidad","El sistema cambia para sobrevivir cuando cambia el entorno.","Una tienda que empieza a vender por internet.","#2b8a3e"]
+];
+var preguntas = [
+  ["¿Qué es un sistema?",["Elementos relacionados que buscan un objetivo común","Una lista de tareas sueltas","Un solo elemento aislado"],0],
+  ["«El todo es mayor que la suma de las partes» describe la:",["Entropía","Sinergia","Jerarquía"],1],
+  ["Un PC sin mantenimiento que se vuelve lento ilustra la:",["Homeostasis","Equifinalidad","Entropía"],2],
+  ["El termostato que corrige la temperatura usa:",["Retroalimentación","Totalidad","Jerarquía"],0],
+  ["Llegar a la misma meta por caminos distintos es:",["Equifinalidad","Sinergia","Entropía"],0],
+  ["Una empresa que cambia a ventas en línea muestra:",["Entropía","Adaptabilidad","Totalidad"],1]
+];
+
+/* ===== Tarjetas ===== */
+var cont = document.getElementById("cartas");
+props.forEach(function (p, i) {
+  var d = document.createElement("div");
+  d.className = "carta";
+  d.style.background = p[4];
+  d.dataset.lado = "frente";
+  d.onclick = function () { voltear(d, i); };
+  cont.appendChild(d);
+  voltear(d, i, true);
+});
+function voltear(d, i, forzar) {
+  var p = props[i];
+  if (!forzar) d.dataset.lado = d.dataset.lado === "frente" ? "atras" : "frente";
+  if (d.dataset.lado === "frente") {
+    d.innerHTML = '<div class="em">' + p[0] + '</div><h3>' + p[1] + '</h3><span class="hint">toca para ver</span>';
+  } else {
+    d.innerHTML = '<div class="back"><b>' + p[1] + '</b><br>' + p[2] + '<small>Ejemplo: ' + p[3] + '</small></div>';
+  }
+}
+
+/* ===== Entropía ===== */
+var desorden = 0, pts = [];
+var cp = document.getElementById("puntos");
+for (var k = 0; k < 40; k++) {
+  var e = document.createElement("div");
+  e.className = "punto";
+  e.style.background = "hsl(" + (k * 9) + ",70%,55%)";
+  e.dx = Math.random() * 60 - 30; e.dy = Math.random() * 60 - 30;
+  cp.appendChild(e); pts.push(e);
+}
+function pintar() {
+  pts.forEach(function (e) {
+    e.style.transform = "translate(" + (e.dx * desorden) + "px," + (e.dy * desorden) + "px)";
+  });
+  var t = document.getElementById("txtEnt");
+  if (desorden === 0) t.textContent = "Sistema ordenado ✅";
+  else if (desorden < 1) t.textContent = "El desorden aumenta… ⚠️";
+  else t.textContent = "Máxima entropía 💥 ¡necesita mantenimiento!";
+}
+function tiempo() { desorden = Math.min(1, desorden + 0.34); pintar(); }
+function mant() { desorden = 0; pintar(); }
+
+/* ===== Termostato ===== */
+var temp = 30, meta = 22;
+function cambiarMeta() { meta = Number(document.getElementById("rango").value); document.getElementById("meta").textContent = meta; }
+function ventana() { temp += 6; mostrar(); }
+function mostrar() {
+  document.getElementById("temp").textContent = temp + " °C";
+  var s = document.getElementById("estado");
+  if (temp > meta) s.textContent = "❄️ Aire encendido: enfriando";
+  else if (temp < meta) s.textContent = "🔥 Calefacción: calentando";
+  else s.textContent = "✅ Equilibrio (homeostasis)";
+}
+setInterval(function () {
+  if (temp > meta) temp--; else if (temp < meta) temp++;
+  mostrar();
+}, 900);
+mostrar();
+
+/* ===== Quiz ===== */
+var n = 0, puntos = 0;
+function iniciar() {
+  n = 0; puntos = 0;
+  document.getElementById("bIni").style.display = "none";
+  mostrarPregunta();
+}
+function mostrarPregunta() {
+  var q = preguntas[n], h = "<h3>" + (n + 1) + "/" + preguntas.length + ". " + q[0] + "</h3>";
+  q[1].forEach(function (o, j) { h += '<button class="op" onclick="responder(' + j + ',this)">' + o + "</button>"; });
+  document.getElementById("quiz").innerHTML = h + '<div id="fb"></div>';
+}
+function responder(j, b) {
+  var q = preguntas[n], todos = document.querySelectorAll(".op");
+  todos.forEach(function (x) { x.disabled = true; });
+  var fb = document.getElementById("fb");
+  if (j === q[2]) { puntos++; sumar(10); b.classList.add("ok"); fb.textContent = "✅ ¡Correcto!"; }
+  else { b.classList.add("mal"); todos[q[2]].classList.add("ok"); fb.textContent = "❌ La respuesta correcta está en verde."; }
+  n++;
+  setTimeout(function () { if (n < preguntas.length) mostrarPregunta(); else final(); }, 1400);
+}
+function final() {
+  var nom = document.getElementById("nombre").value || "estudiante";
+  if (puntos >= 5) lluvia();
+  var medalla = puntos >= 5 ? "🏆 ¡Experto en sistemas!" : puntos >= 3 ? "🥈 ¡Buen trabajo!" : "📘 Repasa las tarjetas e inténtalo de nuevo";
+  document.getElementById("quiz").innerHTML = "<h3>" + nom + ", obtuviste " + puntos + " de " + preguntas.length + "</h3><p style='font-size:1.3rem'>" + medalla + "</p>";
+  document.getElementById("bIni").style.display = "inline-block";
+  document.getElementById("bIni").textContent = "Intentar de nuevo";
+}
+
+/* ===== Puntos ===== */
+var total = 0;
+function sumar(n) { total += n; document.getElementById("pts").textContent = "⭐ " + total + " puntos"; }
+
+/* ===== Confeti ===== */
+function lluvia() {
+  for (var i = 0; i < 26; i++) {
+    var s = document.createElement("span");
+    s.className = "conf";
+    s.textContent = ["🎉", "⭐", "🧩", "✨"][i % 4];
+    s.style.left = Math.random() * 95 + "%";
+    s.style.animationDelay = Math.random() * 1.5 + "s";
+    document.body.appendChild(s);
+    setTimeout((function (x) { return function () { x.remove(); }; })(s), 4500);
+  }
+}
+
+/* ===== Actividad: Relaciona ===== */
+var rel = [
+  ["Un colegio tiene sedes, cada sede tiene grados y cada grado tiene grupos.", 6],
+  ["El aire acondicionado se apaga al llegar a la temperatura programada.", 4],
+  ["Un grupo logra un proyecto que ninguno haría solo.", 1],
+  ["Una máquina se deteriora porque nadie le hace mantenimiento.", 2],
+  ["Una tienda abre ventas por WhatsApp cuando baja la afluencia.", 7],
+  ["Si se daña el motor, todo el carro deja de funcionar.", 0],
+  ["El cuerpo suda para mantener su temperatura estable.", 3]
+];
+var op = "<option value='-1'>Elige…</option>";
+props.forEach(function (p, i) { op += "<option value='" + i + "'>" + p[1] + "</option>"; });
+var rd = document.getElementById("rel");
+rel.forEach(function (r, i) {
+  rd.innerHTML += "<p>" + (i + 1) + ". " + r[0] + "<br><select class='campo' style='display:inline-block;width:auto' id='r" + i + "'>" + op + "</select> <span id='m" + i + "'></span></p>";
+});
+var relPts = 0;
+function revRel() {
+  var bien = 0;
+  rel.forEach(function (r, i) {
+    var ok = Number(document.getElementById("r" + i).value) === r[1];
+    if (ok) bien++;
+    document.getElementById("m" + i).textContent = ok ? "✅" : "❌";
+  });
+  var gan = bien * 10;
+  if (gan > relPts) { sumar(gan - relPts); relPts = gan; }
+  document.getElementById("rRel").textContent = "Aciertos: " + bien + " de " + rel.length;
+  if (bien === rel.length) lluvia();
+}
+
+/* ===== Actividad: Memoria ===== */
+var sel = [], mov = 0, pares = 0, bloq = false, memPts = false;
+function nuevaMem() {
+  var cartas = [];
+  for (var i = 0; i < 6; i++) { cartas.push([i, "e"]); cartas.push([i, "n"]); }
+  cartas.sort(function () { return Math.random() - 0.5; });
+  var m = document.getElementById("mem");
+  m.innerHTML = "";
+  mov = 0; pares = 0; sel = []; bloq = false;
+  document.getElementById("memTxt").textContent = "Movimientos: 0";
+  cartas.forEach(function (c) {
+    var b = document.createElement("button");
+    b.className = "cm";
+    b.textContent = "❓";
+    b.dataset.id = c[0];
+    b.dataset.t = c[1];
+    b.onclick = function () { voltearM(b); };
+    m.appendChild(b);
+  });
+}
+function voltearM(b) {
+  if (bloq || b.classList.contains("up") || b.classList.contains("ok")) return;
+  var i = Number(b.dataset.id);
+  b.textContent = b.dataset.t === "e" ? props[i][0] : props[i][1];
+  b.classList.add("up");
+  sel.push(b);
+  if (sel.length === 2) {
+    mov++;
+    document.getElementById("memTxt").textContent = "Movimientos: " + mov;
+    var a = sel[0], c = sel[1];
+    if (a.dataset.id === c.dataset.id) {
+      a.classList.remove("up"); c.classList.remove("up");
+      a.classList.add("ok"); c.classList.add("ok");
+      sel = []; pares++;
+      if (pares === 6) {
+        if (!memPts) { sumar(15); memPts = true; }
+        lluvia();
+        document.getElementById("memTxt").textContent = "🎉 ¡Lo lograste en " + mov + " movimientos!";
+      }
+    } else {
+      bloq = true;
+      setTimeout(function () {
+        a.textContent = "❓"; c.textContent = "❓";
+        a.classList.remove("up"); c.classList.remove("up");
+        sel = []; bloq = false;
+      }, 900);
+    }
+  }
+}
+nuevaMem();
+
+/* ===== Actividad: Verdadero o falso ===== */
+var vf = [
+  ["Un sistema es un conjunto de elementos aislados que no se relacionan.", false, "Los elementos de un sistema sí se relacionan para lograr un objetivo."],
+  ["La entropía es la tendencia al desorden si no hay energía ni mantenimiento.", true, "¡Así es!"],
+  ["La retroalimentación usa la salida para corregir el sistema.", true, "Correcto: la salida vuelve como información de entrada."],
+  ["La sinergia dice que el todo es menor que la suma de las partes.", false, "Es al contrario: el todo es mayor."],
+  ["La equifinalidad permite llegar a la misma meta por caminos distintos.", true, "¡Correcto!"]
+];
+var vd = document.getElementById("vf");
+vf.forEach(function (v, i) {
+  vd.innerHTML += "<div class='fila'><p>" + (i + 1) + ". " + v[0] + "</p><button onclick='resVF(" + i + ",true)'>Verdadero</button><button onclick='resVF(" + i + ",false)'>Falso</button><div id='v" + i + "'></div></div>";
+});
+function resVF(i, r) {
+  var d = document.getElementById("v" + i);
+  if (d.dataset.hecho) return;
+  d.dataset.hecho = "1";
+  if (r === vf[i][1]) { sumar(5); d.textContent = "✅ " + vf[i][2]; }
+  else { d.textContent = "❌ " + vf[i][2]; }
+}
+
+/* ===== Actividad: Diseña tu sistema ===== */
+var sp = document.getElementById("sProp");
+props.forEach(function (p, i) { sp.innerHTML += "<option value='" + i + "'>Propiedad que más lo describe: " + p[1] + "</option>"; });
+var sisPts = false;
+function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+function val(id) { return document.getElementById(id).value.trim(); }
+function crearSis() {
+  var nom = val("sNom"), en = val("sEn"), pr = val("sPr"), sa = val("sSa");
+  var p = props[Number(val("sProp"))];
+  if (!nom || !en || !pr || !sa) { alert("Completa todos los campos"); return; }
+  document.getElementById("miSis").innerHTML = "<div class='tarj' style='background:" + p[4] + "'><h3>" + p[0] + " " + esc(nom) + "</h3><p>📥 <b>Entradas:</b> " + esc(en) + "</p><p>⚙️ <b>Proceso:</b> " + esc(pr) + "</p><p>📤 <b>Salidas:</b> " + esc(sa) + "</p><p>🔁 <b>Propiedad destacada:</b> " + p[1] + " — " + p[2] + "</p></div>";
+  if (!sisPts) { sumar(20); sisPts = true; lluvia(); }
+}
+
+/* ===== Barra de progreso al hacer scroll ===== */
+window.onscroll = function () {
+  var max = document.body.scrollHeight - window.innerHeight;
+  document.getElementById("prog").style.width = (window.scrollY / max * 100) + "%";
+};
+</script>
+</body>
+</html>
