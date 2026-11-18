@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OVA · Parámetros de los Sistemas | Homeostasis y Equilibrio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Coloca aquí la ruta o nombre de la imagen de la universidad */
+      --bg-universidad: url('logo-universidad.png');
+      --opacidad-fondo: 0.14;
+
+      --bg-main: #070b14;
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-violet: #8b5cf6;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-subtle: rgba(148, 163, 184, 0.18);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Capa de imagen de fondo de la universidad */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: var(--bg-universidad);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: var(--opacidad-fondo);
+      pointer-events: none;
+    }
+
+    h1, h2, h3, .brand {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Encabezado y navegación */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 11, 20, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0.8rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    /* Recuadro superior izquierdo para el logo de la universidad */
+    .uni-logo-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(16, 185, 129, 0.2));
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .uni-logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 3px;
+    }
+
+    .uni-logo-fallback {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      padding: 0.45rem 0.8rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      color: var(--text-primary);
+      background: rgba(6, 182, 212, 0.16);
+      border-color: rgba(6, 182, 212, 0.45);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 14.28%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+      transition: width 0.35s ease;
+    }
+
+    /* Contenedor Principal */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 4rem;
+    }
+
+    .tab-section {
+      display: none;
+      animation: fadeSlide 0.35s ease forwards;
+    }
+
+    .tab-section.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(11, 17, 32, 0.88));
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      padding: 2.1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.14);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      max-width: 720px;
+      font-size: 1rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
+      color: #05111a;
+      border: none;
+      padding: 0.7rem 1.3rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(6, 182, 212, 0.3);
+    }
+
+    .btn-outline {
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 0.6rem 1.15rem;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.12);
+    }
+
+    /* Botón de siguiente módulo al final de cada sección */
+    .next-module-bar {
+      margin-top: 2rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Grids y Tarjetas */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.15rem;
+      margin-top: 1.25rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      transition: border-color 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(6, 182, 212, 0.45);
+    }
+
+    .card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .card p, .card li {
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+    }
+
+    /* Espacios para imágenes ilustrativas en el módulo 2 */
+    .img-slot {
+      margin-top: 1rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px dashed rgba(6, 182, 212, 0.45);
+      background: rgba(7, 11, 20, 0.65);
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.75rem;
+    }
+
+    .img-slot img {
+      width: 100%;
+      max-height: 230px;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .img-placeholder-text {
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+    }
+
+    .img-placeholder-text code {
+      color: var(--accent-cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 1.3rem;
+      font-size: 0.96rem;
+    }
+
+    /* Exploradores Interactivos */
+    .cycle-box {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin-top: 1.4rem;
+    }
+
+    .cycle-nodes {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin: 1rem 0;
+    }
+
+    .node-btn {
+      flex: 1;
+      min-width: 130px;
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.8rem 0.7rem;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: all 0.2s ease;
+    }
+
+    .node-btn.selected {
+      border-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.18);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.2);
+    }
+
+    .node-detail {
+      background: rgba(255, 255, 255, 0.04);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 0.9rem 1.15rem;
+      border-radius: 0 12px 12px 0;
+      color: var(--text-primary);
+      font-size: 0.94rem;
+    }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.25rem;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(6, 182, 212, 0.14);
+      color: var(--accent-cyan);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Ejercicios */
+    .exercise-item {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 0.8rem;
+    }
+
+    .opt-btn {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.5rem 0.95rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .feedback-box {
+      margin-top: 0.8rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    .feedback-ok {
+      display: block;
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #6ee7b7;
+    }
+
+    .feedback-err {
+      display: block;
+      background: rgba(244, 63, 94, 0.16);
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      color: #fda4af;
+    }
+
+    /* Juego 1: Simulador */
+    .sim-dashboard {
+      background: rgba(9, 13, 22, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .meter-bar {
+      width: 100%;
+      height: 22px;
+      background: #1e293b;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+      margin: 0.9rem 0;
+    }
+
+    .safe-zone {
+      position: absolute;
+      left: 35%;
+      width: 30%;
+      height: 100%;
+      background: rgba(16, 185, 129, 0.25);
+      border-left: 2px dashed var(--accent-emerald);
+      border-right: 2px dashed var(--accent-emerald);
+    }
+
+    .meter-needle {
+      position: absolute;
+      top: 0;
+      width: 14px;
+      height: 100%;
+      background: var(--accent-cyan);
+      border-radius: 4px;
+      transition: left 0.25s ease;
+    }
+
+    .sim-stats {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      font-size: 0.93rem;
+    }
+
+    /* Juego 2: Emparejamiento */
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    @media (max-width: 680px) {
+      .match-grid { grid-template-columns: 1fr; }
+    }
+
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .match-card {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid var(--border-subtle);
+      padding: 0.8rem 0.95rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .match-card.active {
+      border-color: var(--accent-amber);
+      background: rgba(245, 158, 11, 0.16);
+    }
+
+    .match-card.matched {
+      border-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.16);
+      color: #6ee7b7;
+      cursor: default;
+    }
+
+    /* Videos */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .video-frame {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* Quiz */
+    .quiz-q {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .quiz-q label {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      margin-top: 0.4rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.91rem;
+    }
+
+    .quiz-q label:hover {
+      background: rgba(6, 182, 212, 0.12);
+    }
+
+    .score-banner {
+      margin-top: 1.25rem;
+      padding: 1.35rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(16, 185, 129, 0.2));
+      border: 1px solid var(--accent-cyan);
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(7, 11, 20, 0.85);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    /* Adaptación móvil */
+    @media (max-width: 600px) {
+      .nav-container {
+        padding: 0.65rem 1rem;
+      }
+      .nav-btn {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.78rem;
+      }
+      .hero {
+        padding: 1.4rem;
+      }
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <div class="brand">
+      <!-- Recuadro superior izquierdo para la foto/logo de la universidad -->
+      <div class="uni-logo-box">
+        <img src="logo-universidad.png" alt="Logo Universidad" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="uni-logo-fallback" style="display:none;">USB</span>
+      </div>
+      <span>Parámetros de los Sistemas</span>
+    </div>
+    <nav id="mainNav">
+      <button class="nav-btn active" data-tab="parametros">1. Parámetros</button>
+      <button class="nav-btn" data-tab="homeostasis">2. Homeostasis y Equilibrio</button>
+      <button class="nav-btn" data-tab="ejercicios">3. Preguntas</button>
+      <button class="nav-btn" data-tab="juegos">4. Juegos</button>
+      <button class="nav-btn" data-tab="videos">5. Videos</button>
+      <button class="nav-btn" data-tab="quiz">6. Evaluación</button>
+      <button class="nav-btn" data-tab="creditos">7. Créditos</button>
+    </nav>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+</header>
+
+<main>
+  <!-- 1. TEORÍA GENERAL: PARÁMETROS DE LOS SISTEMAS -->
+  <section id="parametros" class="tab-section active">
+    <div class="hero">
+      <span class="hero-tag">Teoría General de Sistemas · Ingeniería de Sistemas</span>
+      <h1>Parámetros de los Sistemas</h1>
+      <p>
+        Son las constantes o propiedades fundamentales que definen la estructura, el funcionamiento y los límites de todo sistema frente a su entorno (Bertalanffy, 1968; Chiavenato, 2019).
+      </p>
+      <button class="btn-primary" onclick="switchTab('homeostasis')">Ir a Homeostasis y Equilibrio →</button>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>📥 Entrada (Input)</h3>
+        <p>Recursos, datos, energía o materiales que el sistema importa del entorno para iniciar su operación.</p>
+      </div>
+      <div class="card">
+        <h3>⚙️ Procesamiento (Throughput)</h3>
+        <p>Transformación interna de las entradas mediante subsistemas que generan valor o cambios de estado.</p>
+      </div>
+      <div class="card">
+        <h3>📤 Salida (Output)</h3>
+        <p>Resultados, productos, información o energía exportados hacia el ambiente tras el procesamiento.</p>
+      </div>
+      <div class="card">
+        <h3>🔁 Retroalimentación (Feedback)</h3>
+        <p>Retorno de información sobre la salida para comparar el desempeño con un estándar y corregir desviaciones.</p>
+      </div>
+      <div class="card">
+        <h3>🌐 Ambiente (Entorno)</h3>
+        <p>Medio externo que rodea al sistema, le provee insumos y recibe sus resultados continuamente.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Límite o Frontera</h3>
+        <p>Línea real o conceptual que separa al sistema de su entorno y regula qué entra y qué sale.</p>
+      </div>
+    </div>
+
+    <!-- Explorador interactivo breve -->
+    <div class="cycle-box">
+      <h3>Explorador Rápido de Parámetros (Haz clic en cada uno)</h3>
+      <div class="cycle-nodes">
+        <button class="node-btn selected" onclick="showParam(0, this)">Entrada</button>
+        <button class="node-btn" onclick="showParam(1, this)">Proceso</button>
+        <button class="node-btn" onclick="showParam(2, this)">Salida</button>
+        <button class="node-btn" onclick="showParam(3, this)">Retroalimentación</button>
+        <button class="node-btn" onclick="showParam(4, this)">Ambiente</button>
+        <button class="node-btn" onclick="showParam(5, this)">Frontera</button>
+      </div>
+      <div class="node-detail" id="paramDetail">
+        <strong>Entrada (Input):</strong> Ejemplo en software: peticiones HTTP, credenciales de usuario o datos de sensores que ingresan a una aplicación.
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Parámetro</th>
+          <th>Rol en el Sistema</th>
+          <th>Ejemplo en Ingeniería</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Entrada</strong></td>
+          <td>Abastece de insumos y energía al sistema.</td>
+          <td>Consultas SQL o tráfico de red entrante.</td>
+        </tr>
+        <tr>
+          <td><strong>Proceso</strong></td>
+          <td>Convierte entradas en resultados útiles.</td>
+          <td>Algoritmos de cálculo y lógica de negocio.</td>
+        </tr>
+        <tr>
+          <td><strong>Salida</strong></td>
+          <td>Entrega el resultado final al entorno.</td>
+          <td>Reportes, respuestas JSON o alertas en pantalla.</td>
+        </tr>
+        <tr>
+          <td><strong>Retroalimentación</strong></td>
+          <td>Permite control y mejora continua.</td>
+          <td>Logs de monitoreo y métricas de latencia.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="next-module-bar">
+      <button class="btn-primary" onclick="switchTab('homeostasis')">Continuar a 2. Homeostasis y Equilibrio →</button>
+    </div>
+  </section>
+
+  <!-- 2. TEMAS ESPECÍFICOS: HOMEOSTASIS Y EQUILIBRIO -->
+  <section id="homeostasis" class="tab-section">
+    <h2 class="section-title">Homeostasis y Equilibrio en los Sistemas</h2>
+    <p class="section-subtitle">Mecanismos de estabilidad y autorregulación según Cannon (1932), Ashby (1956) y Bertalanffy (1968).</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>⚖️ Equilibrio del Sistema</h3>
+        <p>Estado donde las fuerzas internas y externas se compensan:</p>
+        <ul style="margin-top:0.5rem; padding-left:1.2rem;">
+          <li><strong>Equilibrio estático:</strong> Reposo total en sistemas cerrados sin intercambio de energía.</li>
+          <li><strong>Equilibrio dinámico (Estado Estacionario):</strong> Estabilidad en sistemas abiertos con flujo constante de entradas y salidas.</li>
+        </ul>
+        <!-- Espacio para imagen 1 -->
+        <div class="img-slot">
+          <img src="equilibrio-sistema.png" alt="Diagrama de Equilibrio Estático y Dinámico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="img-placeholder-text" style="display:none;">
+            🖼️ <strong>Imagen 1:</strong> Equilibrio estático vs. dinámico<br>
+            Guarda tu imagen como <code>equilibrio-sistema.png</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔄 Homeostasis</h3>
+        <p>Capacidad de un sistema abierto para autorregular sus variables internas frente a cambios externos mediante <strong>retroalimentación negativa</strong>.</p>
+        <p style="margin-top:0.5rem;"><strong>Ley de Ashby:</strong> El regulador debe tener tanta variedad de respuestas como perturbaciones genere el entorno.</p>
+        <!-- Espacio para imagen 2 -->
+        <div class="img-slot">
+          <img src="bucle-homeostasis.png" alt="Diagrama de Bucle Homeostático" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="img-placeholder-text" style="display:none;">
+            🖼️ <strong>Imagen 2:</strong> Bucle de autorregulación homeostática<br>
+            Guarda tu imagen como <code>bucle-homeostasis.png</code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bucle Cibernético -->
+    <div class="cycle-box">
+      <h3>Bucle de Regulación Homeostática (Haz clic en cada fase)</h3>
+      <div class="cycle-nodes">
+        <button class="node-btn selected" onclick="showNode(0, this)">1. Perturbación</button>
+        <button class="node-btn" onclick="showNode(1, this)">2. Sensor</button>
+        <button class="node-btn" onclick="showNode(2, this)">3. Controlador</button>
+        <button class="node-btn" onclick="showNode(3, this)">4. Efector</button>
+        <button class="node-btn" onclick="showNode(4, this)">5. Feedback</button>
+      </div>
+      <div class="node-detail" id="nodeDetail">
+        <strong>1. Perturbación:</strong> Cambio externo que altera una variable crítica (ej. aumento brusco de usuarios en un servidor).
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Equilibrio Estático</th>
+          <th>Homeostasis (Equilibrio Dinámico)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sistema</strong></td>
+          <td>Cerrado o aislado.</td>
+          <td>Abierto en intercambio continuo.</td>
+        </tr>
+        <tr>
+          <td><strong>Flujo de energía</strong></td>
+          <td>Nulo al llegar al reposo.</td>
+          <td>Constante (entradas y salidas activas).</td>
+        </tr>
+        <tr>
+          <td><strong>Control</strong></td>
+          <td>Balance pasivo de fuerzas.</td>
+          <td>Retroalimentación negativa adaptativa.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Ejemplos breves -->
+    <div class="grid-3">
+      <div class="card">
+        <h3>☁️ Auto-Scaling Cloud</h3>
+        <p>Si la CPU sube al 90%, el balanceador crea nuevos servidores y los apaga cuando baja la demanda.</p>
+      </div>
+      <div class="card">
+        <h3>🌡️ Termorregulación</h3>
+        <p>Ante calor externo, el cuerpo activa el sudor para mantener su temperatura interna cerca de 37°C.</p>
+      </div>
+      <div class="card">
+        <h3>📦 Inventario ERP</h3>
+        <p>Cuando el stock baja del mínimo, el sistema genera órdenes de compra automáticas para evitar quiebres.</p>
+      </div>
+    </div>
+
+    <div class="next-module-bar">
+      <button class="btn-primary" onclick="switchTab('ejercicios')">Continuar a 3. Preguntas y Ejercicios →</button>
+    </div>
+  </section>
+
+  <!-- 3. PREGUNTAS Y EJERCICIOS -->
+  <section id="ejercicios" class="tab-section">
+    <h2 class="section-title">Preguntas y Ejercicios Prácticos</h2>
+    <p class="section-subtitle">Selecciona la opción correcta para obtener retroalimentación inmediata.</p>
+
+    <div class="exercise-item">
+      <p><strong>1. Un termostato mantiene una sala a 22°C encendiendo el enfriamiento cuando sube a 25°C y apagándolo al volver a 22°C. ¿Qué parámetro actúa?</strong></p>
+      <div class="options-row">
+        <button class="opt-btn" onclick="checkEx(1, false, 'Incorrecto. La retroalimentación positiva aumentaría el calor sin frenar.')">Retroalimentación positiva</button>
+        <button class="opt-btn" onclick="checkEx(1, true, '¡Correcto! La retroalimentación negativa corrige la desviación y mantiene la homeostasis.')">Retroalimentación negativa homeostática</button>
+        <button class="opt-btn" onclick="checkEx(1, false, 'Incorrecto. Un sistema cerrado aislado no intercambia energía con el ambiente.')">Equilibrio estático cerrado</button>
+      </div>
+      <div id="fb-1" class="feedback-box"></div>
+    </div>
+
+    <div class="exercise-item">
+      <p><strong>2. ¿Qué parámetro de los sistemas define qué elementos pertenecen al sistema y cuáles al entorno?</strong></p>
+      <div class="options-row">
+        <button class="opt-btn" onclick="checkEx(2, true, '¡Exacto! El límite o frontera demarca el alcance del sistema frente al ambiente.')">Límite o frontera</button>
+        <button class="opt-btn" onclick="checkEx(2, false, 'Incorrecto. La salida es el resultado exportado hacia el entorno.')">Salida (Output)</button>
+        <button class="opt-btn" onclick="checkEx(2, false, 'Incorrecto. El procesamiento es la transformación interna de insumos.')">Procesamiento</button>
+      </div>
+      <div id="fb-2" class="feedback-box"></div>
+    </div>
+
+    <div class="exercise-item">
+      <p><strong>3. Un firewall con reglas manuales fijas colapsa ante un ataque masivo automatizado. Según Ashby, ¿qué falla?</strong></p>
+      <div class="options-row">
+        <button class="opt-btn" onclick="checkEx(3, true, '¡Correcto! El regulador carece de variedad suficiente para responder a la complejidad externa.')">Ley de la Variedad Requerida</button>
+        <button class="opt-btn" onclick="checkEx(3, false, 'Incorrecto. La entropía aumenta cuando el sistema pierde control.')">Disminución de entropía</button>
+      </div>
+      <div id="fb-3" class="feedback-box"></div>
+    </div>
+
+    <div class="exercise-item">
+      <p><strong>4. ¿Por qué una empresa activa o un organismo vivo no operan en equilibrio estático?</strong></p>
+      <div class="options-row">
+        <button class="opt-btn" onclick="checkEx(4, false, 'Incorrecto. Sí poseen parámetros claros y medibles.')">Porque carecen de parámetros</button>
+        <button class="opt-btn" onclick="checkEx(4, true, '¡Muy bien! Necesitan flujo continuo de entradas y salidas (estado estacionario).')">Porque requieren intercambio continuo con el entorno</button>
+      </div>
+      <div id="fb-4" class="feedback-box"></div>
+    </div>
+
+    <div class="next-module-bar">
+      <button class="btn-primary" onclick="switchTab('juegos')">Continuar a 4. Juegos Interactivos →</button>
+    </div>
+  </section>
+
+  <!-- 4. JUEGOS INTERACTIVOS -->
+  <section id="juegos" class="tab-section">
+    <h2 class="section-title">Juegos Interactivos</h2>
+    <p class="section-subtitle">Practica el control homeostático en tiempo real y relaciona los conceptos clave.</p>
+
+    <!-- Juego 1 -->
+    <div class="sim-dashboard">
+      <h3>🎮 Juego 1: Simulador de Homeostasis en Servidor</h3>
+      <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.7rem;">
+        Mantén la carga dentro de la <strong>zona verde (35% - 65%)</strong> durante 20 segundos frente a variaciones aleatorias.
+      </p>
+      <div class="sim-stats">
+        <span>Carga: <strong id="cpuVal" style="color:var(--accent-cyan)">50%</strong></span>
+        <span>Tiempo Estable: <strong id="timeVal" style="color:var(--accent-emerald)">0 / 20 s</strong></span>
+        <span>Estado: <strong id="simStatus">Listo</strong></span>
+      </div>
+      <div class="meter-bar">
+        <div class="safe-zone"></div>
+        <div class="meter-needle" id="needle" style="left: 49%;"></div>
+      </div>
+      <div style="display:flex; gap:0.7rem; flex-wrap:wrap; margin-top:0.9rem;">
+        <button class="btn-primary" onclick="startSim()">▶ Iniciar</button>
+        <button class="btn-outline" onclick="adjustLoad(-12)">❄️ Enfriar / Escalar (-12%)</button>
+        <button class="btn-outline" onclick="adjustLoad(12)">⚡ Balancear Carga (+12%)</button>
+      </div>
+    </div>
+
+    <!-- Juego 2 -->
+    <div class="card">
+      <h3>🧩 Juego 2: Conecta Concepto y Definición</h3>
+      <p style="color:var(--text-secondary); font-size:0.9rem;">Haz clic en un término de la izquierda y luego en su definición correcta a la derecha.</p>
+      <div class="match-grid">
+        <div class="match-col" id="termsCol"></div>
+        <div class="match-col" id="defsCol"></div>
+      </div>
+      <p id="matchFeedback" style="margin-top:0.9rem; font-weight:600; color:var(--accent-cyan);"></p>
+      <button class="btn-outline" style="margin-top:0.6rem;" onclick="initMatchGame()">Reiniciar Juego</button>
+    </div>
+
+    <div class="next-module-bar">
+      <button class="btn-primary" onclick="switchTab('videos')">Continuar a 5. Videos →</button>
+    </div>
+  </section>
+
+  <!-- 5. VIDEOS -->
+  <section id="videos" class="tab-section">
+    <h2 class="section-title">Videos de Apoyo</h2>
+    <p class="section-subtitle">Material audiovisual sobre Teoría General de Sistemas, homeostasis y equilibrio dinámico.</p>
+
+    <div class="video-grid">
+      <div class="card">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/QbBy20GPlqc" title="Teoría general de los sistemas de Ludwig von Bertalanffy" allowfullscreen></iframe>
+        </div>
+        <h3>Teoría General de los Sistemas (Bertalanffy)</h3>
+        <p>Resumen animado sobre entrada, proceso, salida, retroalimentación, ambiente y homeostasis en los sistemas.</p>
+        <p style="margin-top:0.5rem;"><a href="https://www.youtube.com/watch?v=QbBy20GPlqc" target="_blank" style="color:var(--accent-cyan); font-weight:600; text-decoration:none;">Ver en YouTube ↗</a></p>
+      </div>
+
+      <div class="card">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/0GG-kBu0_E0" title="Características y parámetros de los sistemas - Homeostasis y Variedad Requerida" allowfullscreen></iframe>
+        </div>
+        <h3>Características y Parámetros: Homeostasis y Ley de Ashby</h3>
+        <p>Explicación en Teoría General de Sistemas sobre autorregulación, equilibrio dinámico en sistemas abiertos y variedad requerida.</p>
+        <p style="margin-top:0.5rem;"><a href="https://www.youtube.com/watch?v=0GG-kBu0_E0" target="_blank" style="color:var(--accent-cyan); font-weight:600; text-decoration:none;">Ver en YouTube ↗</a></p>
+      </div>
+    </div>
+
+    <div class="next-module-bar">
+      <button class="btn-primary" onclick="switchTab('quiz')">Continuar a 6. Evaluación →</button>
+    </div>
+  </section>
+
+  <!-- 6. EVALUACIÓN -->
+  <section id="quiz" class="tab-section">
+    <h2 class="section-title">Evaluación</h2>
+    <p class="section-subtitle">Responde las 5 preguntas para calcular tu nota automática sobre 5.0.</p>
+
+    <form id="quizForm">
+      <div class="quiz-q">
+        <p><strong>1. ¿Cuál de los siguientes NO es un parámetro básico de un sistema?</strong></p>
+        <label><input type="radio" name="q1" value="a"> Entrada y procesamiento</label>
+        <label><input type="radio" name="q1" value="b"> Aislamiento absoluto sin frontera</label>
+        <label><input type="radio" name="q1" value="c"> Salida y retroalimentación</label>
+      </div>
+
+      <div class="quiz-q">
+        <p><strong>2. ¿Qué tipo de retroalimentación sostiene principalmente la homeostasis?</strong></p>
+        <label><input type="radio" name="q2" value="a"> Retroalimentación negativa</label>
+        <label><input type="radio" name="q2" value="b"> Retroalimentación positiva ilimitada</label>
+        <label><input type="radio" name="q2" value="c"> Ausencia de control</label>
+      </div>
+
+      <div class="quiz-q">
+        <p><strong>3. ¿Qué caracteriza al equilibrio dinámico (estado estacionario)?</strong></p>
+        <label><input type="radio" name="q3" value="a"> Reposo total sin intercambio de energía</label>
+        <label><input type="radio" name="q3" value="b"> Estabilidad interna con flujo continuo de entradas y salidas</label>
+        <label><input type="radio" name="q3" value="c"> Pérdida irreversible de estructura</label>
+      </div>
+
+      <div class="quiz-q">
+        <p><strong>4. Según la Ley de la Variedad Requerida de Ashby:</strong></p>
+        <label><input type="radio" name="q4" value="a"> El regulador debe igualar la variedad de perturbaciones del entorno</label>
+        <label><input type="radio" name="q4" value="b"> Un sistema rígido siempre es más estable</label>
+        <label><input type="radio" name="q4" value="c"> Los sistemas abiertos no requieren retroalimentación</label>
+      </div>
+
+      <div class="quiz-q">
+        <p><strong>5. Un servidor web que ajusta automáticamente sus nodos según el tráfico aplica:</strong></p>
+        <label><input type="radio" name="q5" value="a"> Equilibrio estático cerrado</label>
+        <label><input type="radio" name="q5" value="b"> Homeostasis y retroalimentación negativa</label>
+        <label><input type="radio" name="q5" value="c"> Entropía máxima</label>
+      </div>
+
+      <button type="button" class="btn-primary" onclick="gradeQuiz()">Calificar Evaluación</button>
+    </form>
+
+    <div class="score-banner" id="scoreBanner"></div>
+
+    <div class="next-module-bar">
+      <button class="btn-primary" onclick="switchTab('creditos')">Continuar a 7. Créditos →</button>
+    </div>
+  </section>
+
+  <!-- 7. CRÉDITOS -->
+  <section id="creditos" class="tab-section">
+    <h2 class="section-title">Créditos y Referencias</h2>
+    <p class="section-subtitle">Autor institucional y bibliografía del Objeto Virtual de Aprendizaje.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>👨‍💻 Autoría</h3>
+        <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+          <li><strong>Estudiante:</strong> Camilo Andrés Fuentes López</li>
+          <li><strong>Docente:</strong> Eddy Ortiz Ramirez</li>
+          <li><strong>Tema:</strong> Parámetros de los sistemas (Homeostasis y Equilibrio)</li>
+          <li><strong>Asignatura:</strong> Teoría General de Sistemas (TGS)</li>
+          <li><strong>Programa:</strong> Ingeniería de Sistemas · Periodo 2026-2</li>
+          <li><strong>Institución:</strong> Universidad Simón Bolívar · Campus Cúcuta</li>
+          <li><strong>Herramientas:</strong> HTML5, CSS3 y JavaScript con apoyo de IA (Gemini)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📚 Referencias</h3>
+        <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+          <li>Ashby, W. R. (1956). <em>An Introduction to Cybernetics</em>. Chapman & Hall.</li>
+          <li>Bertalanffy, L. von (1968). <em>General System Theory</em>. George Braziller.</li>
+          <li>Cannon, W. B. (1932). <em>The Wisdom of the Body</em>. W. W. Norton & Company.</li>
+          <li>Chiavenato, I. (2019). <em>Introducción a la Teoría General de la Administración</em>. McGraw-Hill.</li>
+          <li>Johansen Bertoglio, O. (2004). <em>Introducción a la Teoría General de Sistemas</em>. Limusa.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="next-module-bar">
+      <button class="btn-outline" onclick="switchTab('parametros')">↺ Volver al Inicio (1. Parámetros)</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Universidad Simón Bolívar · Campus Cúcuta · Ingeniería de Sistemas · Teoría General de Sistemas (2026-2) · Camilo Andrés Fuentes López
+</footer>
+
+<script>
+  const tabs = ['parametros', 'homeostasis', 'ejercicios', 'juegos', 'videos', 'quiz', 'creditos'];
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const progressBar = document.getElementById('progressBar');
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+
+    navBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+
+    const idx = tabs.indexOf(tabId);
+    progressBar.style.width = Math.round(((idx + 1) / tabs.length) * 100) + '%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Explorador de parámetros
+  const paramTexts = [
+    "<strong>Entrada (Input):</strong> Recursos, datos o energía que ingresan desde el entorno para alimentar el sistema.",
+    "<strong>Procesamiento (Throughput):</strong> Actividad interna que transforma las entradas en resultados.",
+    "<strong>Salida (Output):</strong> Producto, servicio o información que el sistema entrega al entorno.",
+    "<strong>Retroalimentación (Feedback):</strong> Señal de retorno que compara la salida con el objetivo para corregir fallas.",
+    "<strong>Ambiente (Entorno):</strong> Contexto externo con el que el sistema interactúa permanentemente.",
+    "<strong>Límite o Frontera:</strong> Barrera física o lógica que define qué pertenece al sistema y qué es externo."
+  ];
+
+  function showParam(index, el) {
+    document.querySelectorAll('#parametros .node-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('paramDetail').innerHTML = paramTexts[index];
+  }
+
+  // Explorador Homeostasis
+  const nodeTexts = [
+    "<strong>1. Perturbación:</strong> Cambio externo que altera una variable crítica (ej. aumento brusco de usuarios en un servidor).",
+    "<strong>2. Sensor:</strong> Mide continuamente el estado actual de la variable del sistema.",
+    "<strong>3. Controlador:</strong> Compara el valor medido con el rango óptimo esperado.",
+    "<strong>4. Efector:</strong> Ejecuta la acción correctiva para compensar la desviación.",
+    "<strong>5. Feedback Negativo:</strong> Confirma que la variable volvió al rango estable y detiene el ajuste."
+  ];
+
+  function showNode(index, el) {
+    document.querySelectorAll('#homeostasis .node-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('nodeDetail').innerHTML = nodeTexts[index];
+  }
+
+  // Ejercicios
+  function checkEx(num, isCorrect, msg) {
+    const box = document.getElementById('fb-' + num);
+    box.textContent = msg;
+    box.className = 'feedback-box ' + (isCorrect ? 'feedback-ok' : 'feedback-err');
+  }
+
+  // Juego 1: Simulador
+  let load = 50;
+  let stableSec = 0;
+  let simInterval = null;
+
+  function updateSimUI() {
+    document.getElementById('cpuVal').textContent = load + '%';
+    document.getElementById('needle').style.left = Math.max(0, Math.min(97, load)) + '%';
+    document.getElementById('timeVal').textContent = stableSec + ' / 20 s';
+  }
+
+  function startSim() {
+    clearInterval(simInterval);
+    load = 50;
+    stableSec = 0;
+    document.getElementById('simStatus').textContent = 'Activo · Mantén el rango verde';
+    document.getElementById('simStatus').style.color = '#38bdf8';
+    updateSimUI();
+
+    simInterval = setInterval(() => {
+      const shock = Math.floor(Math.random() * 19) - 8;
+      load = Math.max(0, Math.min(100, load + shock));
+
+      if (load >= 35 && load <= 65) {
+        stableSec++;
+      } else {
+        stableSec = Math.max(0, stableSec - 1);
+      }
+
+      updateSimUI();
+
+      if (load <= 5 || load >= 95) {
+        clearInterval(simInterval);
+        document.getElementById('simStatus').textContent = '💥 Colapso (Pérdida de homeostasis)';
+        document.getElementById('simStatus').style.color = '#f43f5e';
+      } else if (stableSec >= 20) {
+        clearInterval(simInterval);
+        document.getElementById('simStatus').textContent = '🏆 ¡Homeostasis lograda!';
+        document.getElementById('simStatus').style.color = '#10b981';
+      }
+    }, 900);
+  }
+
+  function adjustLoad(delta) {
+    if (!simInterval) return;
+    load = Math.max(0, Math.min(100, load + delta));
+    updateSimUI();
+  }
+
+  // Juego 2: Emparejamiento
+  const pairs = [
+    { id: 1, term: "Parámetros del Sistema", def: "Constantes que definen estructura y operación (entrada, proceso, salida)." },
+    { id: 2, term: "Homeostasis", def: "Autorregulación interna frente a perturbaciones del entorno." },
+    { id: 3, term: "Equilibrio Estático", def: "Reposo en sistemas cerrados sin intercambio de energía." },
+    { id: 4, term: "Retroalimentación Negativa", def: "Mecanismo que revierte desviaciones respecto al punto óptimo." }
+  ];
+
+  let selectedTerm = null;
+  let matchedCount = 0;
+
+  function initMatchGame() {
+    selectedTerm = null;
+    matchedCount = 0;
+    document.getElementById('matchFeedback').textContent = '';
+    const termsCol = document.getElementById('termsCol');
+    const defsCol = document.getElementById('defsCol');
+    termsCol.innerHTML = '';
+    defsCol.innerHTML = '';
+
+    const shuffledDefs = [...pairs].sort(() => Math.random() - 0.5);
+
+    pairs.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'match-card';
+      div.textContent = p.term;
+      div.dataset.id = p.id;
+      div.onclick = () => {
+        if (div.classList.contains('matched')) return;
+        document.querySelectorAll('#termsCol .match-card').forEach(c => c.classList.remove('active'));
+        div.classList.add('active');
+        selectedTerm = p.id;
+      };
+      termsCol.appendChild(div);
+    });
+
+    shuffledDefs.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'match-card';
+      div.textContent = p.def;
+      div.dataset.id = p.id;
+      div.onclick = () => {
+        if (!selectedTerm || div.classList.contains('matched')) return;
+        if (parseInt(div.dataset.id) === selectedTerm) {
+          div.classList.add('matched');
+          const tCard = document.querySelector(`#termsCol .match-card[data-id="${selectedTerm}"]`);
+          tCard.classList.remove('active');
+          tCard.classList.add('matched');
+          selectedTerm = null;
+          matchedCount++;
+          document.getElementById('matchFeedback').textContent = matchedCount === pairs.length
+            ? '🎉 ¡Excelente! Todos los conceptos están conectados.'
+            : '✅ ¡Pareja correcta!';
+        } else {
+          document.getElementById('matchFeedback').textContent = '❌ No coincide, intenta de nuevo.';
+        }
+      };
+      defsCol.appendChild(div);
+    });
+  }
+
+  initMatchGame();
+
+  // Quiz
+  function gradeQuiz() {
+    const answers = { q1: 'b', q2: 'a', q3: 'b', q4: 'a', q5: 'b' };
+    let score = 0;
+    for (let q in answers) {
+      const chosen = document.querySelector(`input[name="${q}"]:checked`);
+      if (chosen && chosen.value === answers[q]) score++;
+    }
+    const banner = document.getElementById('scoreBanner');
+    banner.style.display = 'block';
+    const nota = (score / 5 * 5).toFixed(1);
+    banner.innerHTML = `
+      <h3>Resultado: ${score} / 5 aciertos · Nota: ${nota} / 5.0</h3>
+      <p style="margin-top:0.4rem;">${score >= 4 ? '¡Dominio sobresaliente del tema!' : 'Repasa las secciones teóricas y vuelve a intentarlo.'}</p>
+    `;
+  }
+</script>
+</body>
+</html>
